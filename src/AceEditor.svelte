@@ -39,6 +39,6 @@
     }
 </script>
 
-<div style="width:500px;height:500px">
-    <div bind:this={editorElement} style="width:500px;height:500px"></div>
+<div style="width:550px;height:500px">
+    <div bind:this={editorElement} style="width:550px;height:500px"></div>
 </div>

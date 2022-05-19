@@ -1,27 +1,27 @@
 <script  lang="ts">
     import AceEditor from "./AceEditor";
-    let code = ``;
+    import {
+        find_shortest_path_by_dijkstra
+    } from "./algorithms";
+    let algorithm = ``;
     const execute = (obj) => {
         if (obj.validSyntax) {
-            code = obj.value;
+            algorithm = obj.value;
         }
     }
+    const algorithmD = find_shortest_path_by_dijkstra.toString();
+    const f = new Function("G", "x", `return ${algorithmD}(G, x)`);
+    console.log(f("1", "1"));
 </script>
 
 <section class="container">
     <AceEditor
             on:input={(obj) => execute(obj.detail)}
-            width='100%'
-            height='300px'
             lang="json"
             theme="chrome"
-            value={`function foo(items) {
-    var x = "All this is syntax highlighted";
-    return x;
-}
-`} />
+            value={find_shortest_path_by_dijkstra.toString()} />
     <section>
-        {code}
+        {algorithm}
     </section>
 </section>
 
@@ -31,8 +31,8 @@
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: stretch;
+        justify-content: space-around;
+        align-items: center;
         align-content: stretch;
     }
 </style>
