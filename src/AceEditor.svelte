@@ -31,14 +31,19 @@
     });
     function setEventCallBacks() {
         editor.getSession().on("changeAnnotation",  () => {
+            const isValidSyntax = editor.getSession().getAnnotations().length === 0;
+            const algorithm = editor.getSession().getValue(0);
             dispatch("input", {
-                "validSyntax": editor.getSession().getAnnotations().length === 0,
-                "value": editor.getSession().getValue(0)
+                "validSyntax": isValidSyntax,
+                "value": algorithm
             });
+            if (isValidSyntax) {
+                localStorage.setItem("algorithm", algorithm);
+            }
         });
     }
 </script>
 
-<div style="width:550px;height:500px">
-    <div bind:this={editorElement} style="width:550px;height:500px"></div>
+<div style="width: 40%; height: 90vh">
+    <div bind:this={editorElement} style="width: 100%; height: 100%"></div>
 </div>

@@ -1,9 +1,8 @@
-<script  lang="ts">
+<script lang="ts">
     import AceEditor from "./AceEditor";
-    import {
-        find_shortest_path_by_dijkstra,
-        build_function
-    } from "./algorithms";
+    import Maze from './Maze.svelte';
+    import {find_shortest_path_by_dijkstra} from "./algorithms";
+    const defaultAlgorithm = localStorage.getItem("algorithm") ?? find_shortest_path_by_dijkstra;
     let algorithm = ``;
     const execute = (obj) => {
         if (obj.validSyntax) {
@@ -15,20 +14,15 @@
 <section class="container">
     <AceEditor
             on:input={(obj) => execute(obj.detail)}
-            value={find_shortest_path_by_dijkstra.toString()} />
-    <section>
-        {build_function(algorithm)("Graph", "Source")}
-    </section>
+            value={defaultAlgorithm}/>
+    <Maze/>
 </section>
-
 
 <style>
     .container {
         display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-around;
-        align-items: center;
-        align-content: stretch;
+        flex-flow: row wrap;
+        margin: 1em 1em 1em 1em;
+        justify-content: space-between;
     }
 </style>
