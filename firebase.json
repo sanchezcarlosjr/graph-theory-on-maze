@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "graph-theory",
     "public": "public",
     "ignore": [
       "firebase.json",
