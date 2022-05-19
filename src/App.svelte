@@ -1,7 +1,8 @@
 <script  lang="ts">
     import AceEditor from "./AceEditor";
     import {
-        find_shortest_path_by_dijkstra
+        find_shortest_path_by_dijkstra,
+        build_function
     } from "./algorithms";
     let algorithm = ``;
     const execute = (obj) => {
@@ -9,19 +10,14 @@
             algorithm = obj.value;
         }
     }
-    const algorithmD = find_shortest_path_by_dijkstra.toString();
-    const f = new Function("G", "x", `return ${algorithmD}(G, x)`);
-    console.log(f("1", "1"));
 </script>
 
 <section class="container">
     <AceEditor
             on:input={(obj) => execute(obj.detail)}
-            lang="json"
-            theme="chrome"
             value={find_shortest_path_by_dijkstra.toString()} />
     <section>
-        {algorithm}
+        {build_function(algorithm)("Graph", "Source")}
     </section>
 </section>
 

@@ -1,5 +1,5 @@
 import './global.css';
-import './build-in-objects';
+import './built-in-objects';
 
 import App from './App.svelte';
 
