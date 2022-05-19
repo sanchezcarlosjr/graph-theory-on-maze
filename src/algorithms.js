@@ -1,6 +1,4 @@
 export const find_shortest_path_by_dijkstra = `function find_shortest_path_by_dijkstra(G, source_vertex) {
-    console.log(G);
-    console.log(source_vertex);
     const path = new Set();
     const queue = new Queue();
     while (!queue.isEmpty()) {
