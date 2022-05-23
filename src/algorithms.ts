@@ -4,8 +4,17 @@ export const algorithms = [
         name: "Dijkstra",
         algorithm: `function find_shortest_path_by_dijkstra(G, source_vertex) {
     const path = new Set();
-    const queue = new Queue();
+    const queue = new PriorityQueue(new BinaryHeap());
+    queue.insert(G.vertices);
     while (!queue.isEmpty()) {
+         const u = queue.extractMin();
+         path.add(u);
+         for(const vertex of G.adj(u)) {
+              const relaxHasDecreased = G.relax(u,v);
+              if (relaxHasDecreased) {
+                 queue.decreaseKey();
+              }
+         }
     }
     return path;
 }` },
@@ -19,6 +28,30 @@ export const algorithms = [
         id: 3,
         name: "Breadth first search",
         algorithm: `function find_shortest_path_by_breadth_first_search(G, source_vertex) {
+    return path;
+}` },
+    {
+        id: 4,
+        name: "Linear programming",
+        algorithm: `function find_shortest_path_by_linear_programming(G, source_vertex) {
+    return path;
+}` },
+    {
+        id: 5,
+        name: "Bellman-Ford",
+        algorithm: `function find_shortest_path_by_bellman_ford(G, source_vertex) {
+    return path;
+}` },
+    {
+        id: 6,
+        name: "Deep first search",
+        algorithm: `function find_shortest_path_by_deep_first_search(G, source_vertex) {
+    return path;
+}` },
+    {
+        id: 7,
+        name: "Genetic algorithm",
+        algorithm: `function find_shortest_path_by_genetic_algorithm(G, source_vertex) {
     return path;
 }` },
 ];
