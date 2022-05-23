@@ -1,6 +1,6 @@
 <script lang="ts">
     import {makeAGraphMaze} from "./Graph";
-    const graph = makeAGraphMaze(9);
+    const graph = makeAGraphMaze(30);
 </script>
 <div class="maze">
     {#each [...graph.vertices] as vertex, i}
@@ -13,19 +13,18 @@
     .maze {
         display: flex;
         flex-wrap: wrap;
-        --n: 10;
+        --n: 30;
         width: 55%;
     }
 
     .tile {
         background-size: cover;
-        width: calc((100% - (var(--n) - 1) * 1px) / var(--n));
+        width: calc((100% - (var(--n) - 1) * 0px) / var(--n));
         aspect-ratio: 1;
-        border: 1px solid grey;
-        background: lightgrey center;
+        background: #1919A6 center;
     }
 
     .floor {
-        background: skyblue;
+        background: black;
     }
 </style>

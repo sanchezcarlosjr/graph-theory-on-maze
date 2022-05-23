@@ -9,9 +9,37 @@ export function randomBetweenNumbers(max: number, min: number) {
 }
 
 export function randomBetweenArray(...array: any[]) {
-    return array[randomBetweenNumbers(array.length-1, 0)];
+    const index = randomBetweenNumbers(array.length-1, 0);
+    return [array[index], index];
 }
 
+class RandomizedQueue {
+    private list: Set<string> = new Set<string>();
+    private squaredSide: number = this.side**2;
+    constructor(private side: number) {
+    }
+    put(adj: Map<string, { [key: string]: string | number | boolean }>) {
+        for(const key of adj.keys()) {
+            const k = parseInt(key);
+            const isNotBorder = k >= this.side && k%this.side !== 0 && (k-this.side+1) % this.side !== 0 && k < this.squaredSide-this.side;
+            if (isNotBorder) {
+                this.list.add(key);
+            }
+        }
+    }
+    enqueue() {
+        const index = randomBetweenNumbers(this.list.size-1, 0);
+        const value = [...this.list.values()][index];
+        this.list.delete(value);
+        return value;
+    }
+    isEmpty() {
+        return this.list.size === 0;
+    }
+    in(vertex: string) {
+        return this.list.has(vertex);
+    }
+}
 
 export function makeAGraphMaze(n) {
     const squaredN = n ** 2;
@@ -103,8 +131,24 @@ export class Graph {
             randomBetweenNumbers(2*side-2,side+1),
             randomBetweenNumbers(3*side-2,2*side+1),
             randomBetweenNumbers(side*(side-2)+(side-2),side*(side-2)+1)
-        ).toString();
+        )[0].toString();
         this.vertex(source).cost = 0;
+        const visitedVertices = new Set<string>([source]);
+        const queue = new RandomizedQueue(side);
+        queue.put(this.getAdjacent(source));
+        while(!queue.isEmpty()) {
+            const wall = queue.enqueue();
+            const n = Array
+                .from(this.getAdjacent(wall).keys())
+                .map((cell) => visitedVertices.has(cell))
+                .filter((v)=> v)
+                .length;
+            if (n===1) {
+                visitedVertices.add(wall);
+                this.vertex(wall).cost = 0;
+                queue.put(this.getAdjacent(wall));
+            }
+        }
         return this;
     }
 
