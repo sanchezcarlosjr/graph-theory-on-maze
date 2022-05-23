@@ -4,6 +4,15 @@ interface Vertex {
     [key: string]: string | number | boolean | Map<string, { [key: string]: string | number | boolean }>;
 }
 
+export function randomBetweenNumbers(max: number, min: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function randomBetweenArray(...array: any[]) {
+    return array[randomBetweenNumbers(array.length-1, 0)];
+}
+
+
 export function makeAGraphMaze(n) {
     const squaredN = n ** 2;
     const graph = new Graph();
@@ -13,13 +22,15 @@ export function makeAGraphMaze(n) {
                 weight: 1
             });
         }
+    }
+    for (let i = 0; i < squaredN; i++) {
         if (i < squaredN-n) {
             graph.addNoDirectedEdge(i.toString(), (i+n).toString(), {
                 weight: 1
             });
         }
     }
-    graph.toValidMaze();
+    graph.toValidMaze(n);
     return graph;
 }
 
@@ -38,7 +49,8 @@ export class Graph {
             return this.graph.set(vertexA, {
                 adjacent: new Map<string, { [key: string]: string | number | boolean }>([[vertexB, {
                     ...attributes
-                }]])
+                }]]),
+                name: vertexA
             });
         }
         this.graph.get(vertexA).adjacent.set(vertexB, {
@@ -83,10 +95,16 @@ export class Graph {
         return this.graph.has(vertex);
     }
 
-    toValidMaze() {
+    toValidMaze(side: number) {
         for(const vertex of this.vertices) {
             vertex["cost"] = Infinity;
         }
+        const source = randomBetweenArray(
+            randomBetweenNumbers(2*side-2,side+1),
+            randomBetweenNumbers(3*side-2,2*side+1),
+            randomBetweenNumbers(side*(side-2)+(side-2),side*(side-2)+1)
+        ).toString();
+        this.vertex(source).cost = 0;
         return this;
     }
 
