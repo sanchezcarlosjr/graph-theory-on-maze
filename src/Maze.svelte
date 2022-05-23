@@ -1,6 +1,10 @@
+<script lang="ts">
+    import {makeAGraphMaze} from "./Graph";
+    const graph = makeAGraphMaze(9);
+</script>
 <div class="maze">
-    {#each Array(81) as _, i}
-        <div class="tile" class:floor="{Math.random() >= 0.5}"></div>
+    {#each [...graph.vertices] as vertex, i}
+        <div class="tile" class:floor="{vertex.cost === 0}"></div>
     {/each}
 </div>
 
