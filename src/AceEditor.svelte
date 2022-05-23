@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { createEventDispatcher, onMount, onDestroy } from "svelte";
     import * as ace from "ace-builds";
     ace.config.set("basePath", "https://unpkg.com/ace-builds@1.5.0/src-noconflict");
@@ -29,6 +29,13 @@
         contentBackup = value;
         setEventCallBacks();
     });
+    $: watchValue(value);
+    function watchValue(val: string) {
+        if (contentBackup !== val && editor && typeof val === "string") {
+            editor.session.setValue(val);
+            contentBackup = val;
+        }
+    }
     function setEventCallBacks() {
         editor.getSession().on("changeAnnotation",  () => {
             const isValidSyntax = editor.getSession().getAnnotations().length === 0;
