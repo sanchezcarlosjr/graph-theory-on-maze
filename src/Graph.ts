@@ -13,6 +13,12 @@ export function randomBetweenArray(...array: any[]) {
     return [array[index], index];
 }
 
+export function randomBetweenSet(set: Set<any>) {
+    const index = randomBetweenNumbers(set.size-1, 0);
+    const value = [...set.values()][index];
+    return [value, index];
+}
+
 class RandomizedQueue {
     private list: Set<string> = new Set<string>();
     private squaredSide: number = this.side**2;
@@ -28,8 +34,7 @@ class RandomizedQueue {
         }
     }
     enqueue() {
-        const index = randomBetweenNumbers(this.list.size-1, 0);
-        const value = [...this.list.values()][index];
+        const [value] = randomBetweenSet(this.list);
         this.list.delete(value);
         return value;
     }
@@ -58,8 +63,8 @@ export function makeAGraphMaze(n) {
             });
         }
     }
-    graph.toValidMaze(n);
-    return graph;
+    const [source, goal] = graph.toValidMaze(n);
+    return [graph, source, goal];
 }
 
 export class Graph {
@@ -130,6 +135,8 @@ export class Graph {
         const source = randomBetweenArray(
             randomBetweenNumbers(2*side-2,side+1),
             randomBetweenNumbers(3*side-2,2*side+1),
+            randomBetweenNumbers(4*side-2,3*side+1),
+            randomBetweenNumbers(5*side-2,4*side+1),
             randomBetweenNumbers(side*(side-2)+(side-2),side*(side-2)+1)
         )[0].toString();
         this.vertex(source).cost = 0;
@@ -149,7 +156,9 @@ export class Graph {
                 queue.put(this.getAdjacent(wall));
             }
         }
-        return this;
+        visitedVertices.delete(source);
+        const [goal] = randomBetweenSet(visitedVertices);
+        return [source, goal];
     }
 
     getAdjacent(vertex: string) {
