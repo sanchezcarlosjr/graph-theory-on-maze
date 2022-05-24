@@ -1,4 +1,4 @@
-import {Graph, makeAGraphMaze, Vertex} from "../src/Graph";
+import {Graph, makeAGraphMaze, findRandomSourceForMaze} from "../src/Graph";
 
 describe("Graph", () => {
     it("should add edge", () => {
@@ -57,7 +57,7 @@ describe("Graph", () => {
         expect(graph.weight("A", "C")).toEqual(Infinity);
     });
     it("should transform maze to graph", () => {
-        const graph = makeAGraphMaze(4);
+        const [graph] = makeAGraphMaze(4);
         expect(graph.hasEdge("0", "1")).toBeTruthy();
         expect(graph.hasEdge("1", "2")).toBeTruthy();
         expect(graph.hasEdge("2", "3")).toBeTruthy();
@@ -74,5 +74,12 @@ describe("Graph", () => {
         expect(graph.hasEdge("12", "16")).toBeFalsy();
         expect(graph.hasEdge("15", "16")).toBeFalsy();
         expect(graph.hasEdge("15", "19")).toBeFalsy();
+    });
+    it("should get valid random source", () => {
+      for(let i=0; i<99; i++) {
+          const [value] = findRandomSourceForMaze(4);
+          expect(value).toBeLessThanOrEqual(10);
+          expect(value).toBeGreaterThanOrEqual(5);
+      }
     });
 });

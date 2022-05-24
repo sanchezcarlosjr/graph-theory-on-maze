@@ -19,6 +19,14 @@ export function randomBetweenSet(set: Set<any>) {
     return [value, index];
 }
 
+export function findRandomSourceForMaze(side: number) {
+    const validSources = [];
+    for(let i=0; i<side-2; i++) {
+        validSources.push(randomBetweenNumbers((i+2)*side - 2, (i+1)*side + 1));
+    }
+    return randomBetweenArray(...validSources);
+}
+
 class RandomizedQueue {
     private list: Set<string> = new Set<string>();
     private squaredSide: number = this.side**2;
@@ -105,7 +113,7 @@ export class Graph {
 
     vertex(vertex: string) {
         if (!this.graph.has(vertex)) {
-            return;
+            throw  new Error(`${vertex} is not in graph`);
         }
         return this.graph.get(vertex);
     }
@@ -132,13 +140,7 @@ export class Graph {
         for(const vertex of this.vertices) {
             vertex["cost"] = Infinity;
         }
-        const source = randomBetweenArray(
-            randomBetweenNumbers(2*side-2,side+1),
-            randomBetweenNumbers(3*side-2,2*side+1),
-            randomBetweenNumbers(4*side-2,3*side+1),
-            randomBetweenNumbers(5*side-2,4*side+1),
-            randomBetweenNumbers(side*(side-2)+(side-2),side*(side-2)+1)
-        )[0].toString();
+        const source = findRandomSourceForMaze(side)[0].toString();
         this.vertex(source).cost = 0;
         const visitedVertices = new Set<string>([source]);
         const queue = new RandomizedQueue(side);
