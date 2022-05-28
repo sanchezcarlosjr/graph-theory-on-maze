@@ -30,9 +30,7 @@
 </header>
 
 <section class="environment">
-    <AceEditor
-            on:input={(obj) => execute(obj.detail)}
-            bind:value={defaultAlgorithm.algorithm}/>
+    <AceEditor on:input={(obj) => execute(obj.detail)} bind:value={defaultAlgorithm.algorithm}/>
     <Maze/>
 </section>
 
