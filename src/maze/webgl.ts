@@ -1,12 +1,10 @@
 export class Webgl {
-    gl = null;
-    programInfo = {
-        program: undefined
-    };
-    buffers = {};
+    gl: WebGLRenderingContext|null = null;
+    objectsToDraw: { initBuffers: (obj) => void; program: any; draw: (obj) => void }[] = [];
     configureWebGl = () => {
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0); 
         this.gl.depthFunc(this.gl.LEQUAL);
+        this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
         this.setDefaultViewport();
     };
@@ -42,8 +40,6 @@ export class Webgl {
         return null;
       }
 
-      this.programInfo['program'] = shaderProgram;
-      this.gl.useProgram(this.programInfo.program);
       return shaderProgram;
     }
     loadShader(type, source) {
@@ -67,10 +63,11 @@ export class Webgl {
     
       return shader;
     }
-    initBuffers(f = () => {}) {
-      this.buffers = f.bind(this)();
-    }
-    drawScene(f = () => {}) {
-        f.bind(this)();
+    drawScene() {
+        this.objectsToDraw.forEach((obj) => {
+            this.gl.useProgram(obj.program);
+            obj.initBuffers.bind(this)(obj);
+            obj.draw.bind(this)(obj);
+        });
     }     
 }
