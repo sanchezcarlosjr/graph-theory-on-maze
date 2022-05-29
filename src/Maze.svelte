@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import {model, renderImage} from "./webgl/render";
+    import {model, renderAnimation, renderImage} from "./webgl/render";
     let canvas;
     let gl;
     let render = async () => {
@@ -8,7 +8,7 @@
             return;
         }
         const objects = await model(gl);
-        await renderImage(gl, objects);
+        await renderAnimation(gl, objects);
     }
     onMount(async () => {
         gl = canvas.getContext("webgl");

@@ -22,14 +22,15 @@ export const shaders = [
             
             void main()
             {
-                gl_FragColor = vec4(0,0.5,0.5,1);
+                gl_FragColor = vec4(255,0,0,0.6);
             }
         `,
         vertex: `
             attribute vec4 vertex;
+            uniform mat4 transformation;
             
             void main() {
-                gl_Position = vertex;
+                gl_Position = transformation*vertex;
             }
         `
     },
@@ -39,11 +40,11 @@ export const shaders = [
             
             void main()
             {
-                gl_FragColor = vec4(0,0,0.5,1);
+                gl_FragColor = vec4(255,215,0,1);
             }
         `,
         vertex: `
-            attribute vec4 vertex;
+             attribute vec4 vertex;
             
             void main() {
                 gl_Position = vertex;

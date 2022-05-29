@@ -1,5 +1,6 @@
 import {shaders} from "../maze/shader";
-import {GLObject, VerticesAttribute} from "./GLObject";
+import {GLObject, Uniform, VerticesAttribute} from "./GLObject";
+import {mat4, vec3} from "gl-matrix";
 import {createProgramInfo, resizeCanvasToDisplaySize} from "./webgl";
 import {makeAGraphMaze} from "../Graph";
 import {Coordinate, makeMaze, square} from "../maze/program";
@@ -47,8 +48,25 @@ export async function model(gl) {
                     numComponents: 2
                 })
             ],
-            [],
-            gl.LINE_LOOP
+            [
+                new Uniform({
+                      gl,
+                      programInfo: programsInfo[1],
+                      name: "transformation",
+                      uniformSetter: "uniformMatrix4fv",
+                      values: [false,
+                          mat4.translate(
+                              mat4.create(),
+                              mat4.scale(mat4.create(), mat4.identity(mat4.create()), [0.5,0.5,0]),
+                              [0,0,0]
+                          )
+                      ],
+                      draw: (values, time) => {
+                          return [false, mat4.translate(mat4.create(), values[1], [-0.01, 0, 0])];
+                      }
+                    })
+            ],
+            gl.TRIANGLES
         ), new GLObject(
             programsInfo[2],
             gl,
@@ -62,7 +80,7 @@ export async function model(gl) {
                 })
             ],
             [],
-            gl.LINE_LOOP
+            gl.TRIANGLES
         )
     ];
 }
@@ -70,7 +88,7 @@ export async function model(gl) {
 export async function renderAnimation(gl, glObjects: GLObject[]) {
     function drawScene(time) {
         config(gl);
-        time *= 0.005;
+        time *= 0.05;
         glObjects.forEach((glObject) => {
             glObject.render(time);
         });
