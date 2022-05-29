@@ -62,7 +62,4 @@
         margin: 1em 1em 1em 1em;
         justify-content: space-around;
     }
-    input {
-        width: 20%;
-    }
 </style>
