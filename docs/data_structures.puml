@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/class-diagram
+class PriorityQueue {
+ isEmpty
+ insertWithPriority()
+ pullHighestPriorityElement()
+}
+
+PriorityQueue --> Heap
+class Heap<T> {
+  heap: T[]
+  size
+  isEmpty
+  findMax()
+  findMin()
+  insert()
+  extractMax()
+  extractMin()
+  deleteMin()
+  deleteMax()
+  replace()
+  heapify()
+  meld()
+  merge(Heap)
+}
+
+class BinaryHeap extends Heap
+class LeftistHeap extends Heap
+class BinomialHeap extends Heap
+class FibonacciHeap extends Heap
+class PairingHeap extends Heap
+class BrodalHeap extends Heap
+class RankpairingHeap extends Heap
+class StrictFibonacciHeap extends Heap
+class TwoTreeHeap extends Heap
+
+@enduml
