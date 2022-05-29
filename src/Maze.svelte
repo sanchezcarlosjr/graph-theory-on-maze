@@ -1,13 +1,20 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import {model, renderAnimation, renderImage} from "./webgl/render";
+    import {model, renderAnimation} from "./webgl/render";
+    import {makeAGraphMaze} from "./Graph";
     let canvas;
     let gl;
-    let render = async () => {
+    let n = 20;
+    export let graph = undefined;
+    export let source = "";
+    export let goal = "";
+    export let path = [];
+    [graph, source, goal] = makeAGraphMaze(n);
+    let render = async (newPath) => {
         if (!gl) {
             return;
         }
-        const objects = await model(gl);
+        const objects = await model(gl, n, graph, source, goal, newPath);
         await renderAnimation(gl, objects);
     }
     onMount(async () => {
@@ -15,8 +22,8 @@
         if (!gl) {
             throw new Error("WebGL doesn't work.");
         }
-        await render();
     });
+    $: render(path);
 </script>
 
 <canvas  bind:this={canvas}></canvas>

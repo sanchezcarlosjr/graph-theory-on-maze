@@ -1,8 +1,7 @@
 import {shaders} from "../maze/shader";
 import {GLObject, Uniform, VerticesAttribute} from "./GLObject";
-import {mat4, vec3} from "gl-matrix";
+import {mat4} from "gl-matrix";
 import {createProgramInfo, resizeCanvasToDisplaySize} from "./webgl";
-import {makeAGraphMaze} from "../Graph";
 import {Coordinate, makeMaze, square} from "../maze/program";
 
 export function config(gl) {
@@ -15,10 +14,45 @@ export function config(gl) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 }
 
-export async function model(gl) {
-    const n = 20;
-    let [graph, source, goal] = makeAGraphMaze(n);
+export async function model(gl, n = 20, graph, source, goal, path) {
+    const speed = 0.01;
     const coordinate = new Coordinate(n);
+    path = path.map((x) => x.toString());
+    const frames = coordinate.WIDTH / speed;
+    let actualVertex = 1;
+    const drawPath = (values) => {
+        if (actualVertex >= path.length || path[actualVertex] === goal) {
+            return [false, mat4.translate(mat4.create(), values[1], [0, 0, 0])];
+        }
+        const diffX = Math.round(Math.abs(values[1][12]) * 100);
+        if (+path[actualVertex] + 1 === +path[actualVertex - 1] && (diffX === 0 || diffX % frames !== 0)) {
+            return [false, mat4.translate(mat4.create(), values[1], [-speed, 0, 0])];
+        }
+        if (+path[actualVertex] - 1 === +path[actualVertex - 1] && (diffX === 0 || diffX % frames !== 0)) {
+            return [false, mat4.translate(mat4.create(), values[1], [speed, 0, 0])];
+        }
+        const diffY = Math.round(Math.abs(values[1][13]) * 100);
+        if (+path[actualVertex] + n === +path[actualVertex - 1] && (diffY === 0 || diffY % frames !== 0)) {
+            return [false, mat4.translate(mat4.create(), values[1], [0, speed, 0])];
+        }
+        if (+path[actualVertex] - n === +path[actualVertex - 1] && (diffY === 0 || diffY % frames !== 0)) {
+            return [false, mat4.translate(mat4.create(), values[1], [0, -speed, 0])];
+        }
+        actualVertex++;
+        if (+path[actualVertex] - 1 === +path[actualVertex - 1]) {
+            return [false, mat4.translate(mat4.create(), values[1], [speed, 0, 0])];
+        }
+        if (+path[actualVertex] - 1 === +path[actualVertex - 1]) {
+            return [false, mat4.translate(mat4.create(), values[1], [speed, 0, 0])];
+        }
+        if (+path[actualVertex] + n === +path[actualVertex - 1]) {
+            return [false, mat4.translate(mat4.create(), values[1], [0, speed, 0])];
+        }
+        if (+path[actualVertex] - n === +path[actualVertex - 1]) {
+            return [false, mat4.translate(mat4.create(), values[1], [0, -speed, 0])];
+        }
+        return [false, mat4.translate(mat4.create(), values[1], [0, 0, 0])];
+    };
     const programsInfo = shaders.map((shader) => createProgramInfo(gl, [shader.vertex, shader.fragment]));
     return [
         new GLObject(
@@ -50,21 +84,16 @@ export async function model(gl) {
             ],
             [
                 new Uniform({
-                      gl,
-                      programInfo: programsInfo[1],
-                      name: "transformation",
-                      uniformSetter: "uniformMatrix4fv",
-                      values: [false,
-                          mat4.translate(
-                              mat4.create(),
-                              mat4.scale(mat4.create(), mat4.identity(mat4.create()), [0.5,0.5,0]),
-                              [0,0,0]
-                          )
-                      ],
-                      draw: (values, time) => {
-                          return [false, mat4.translate(mat4.create(), values[1], [-0.01, 0, 0])];
-                      }
-                    })
+                    gl,
+                    programInfo: programsInfo[1],
+                    name: "transformation",
+                    uniformSetter: "uniformMatrix4fv",
+                    values: [
+                        false,
+                        mat4.identity(mat4.create())
+                    ],
+                    draw: drawPath
+                })
             ],
             gl.TRIANGLES
         ), new GLObject(

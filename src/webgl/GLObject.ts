@@ -15,6 +15,7 @@ interface PositionAttributeProperties extends AttributeProperties {
 
 interface VerticesAttributeProperties extends AttributeProperties {
     vertices?: number[];
+    draw?: (values, time) => any[]
 }
 
 interface TextureAttributeProperties extends AttributeProperties {
@@ -111,6 +112,8 @@ export class PositionAttribute extends GLAttribute<PositionAttributeProperties> 
 export class VerticesAttribute extends GLAttribute<VerticesAttributeProperties> {
     protected _numberElements = 0;
     constructor(props: VerticesAttributeProperties) {
+        const draw = (values) => values;
+        props.draw = props.draw ?? draw;
         super(props);
         this._numberElements = props.vertices.length / props.numComponents;
     }

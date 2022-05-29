@@ -1,7 +1,13 @@
 <script lang="ts">
     import AceEditor from "./AceEditor";
     import Maze from './Maze.svelte';
-    import {algorithms} from "./algorithms";
+    import {algorithms, build_function} from "./algorithms";
+    import {Graph} from "./Graph";
+    let n = 20;
+    let graph = new Graph();
+    let source = "";
+    let goal = "";
+    let path = [];
     let defaultAlgorithm: {id: number, name: string, algorithm: string} = {
         id: algorithms.length+1,
         name: "User Algorithm",
@@ -10,9 +16,10 @@
 }`
     };
     algorithms.push(defaultAlgorithm);
-    let algorithm = ``;
+    let algorithm = "";
     const execute = (obj) => {
-        if (obj.validSyntax) {
+        if (obj.validSyntax && algorithm !== obj.value) {
+            path = build_function(obj.value)(graph, source);
             algorithm = obj.value;
         }
     }
@@ -20,18 +27,20 @@
 
 <header>
     <h1>Graph Theory Visualizer: Maze</h1>
-    <select bind:value={defaultAlgorithm}>
-        {#each algorithms as element}
-            <option value={element}>
-                {element.name}
-            </option>
-        {/each}
-    </select>
+    <section class="options">
+        <select bind:value={defaultAlgorithm}>
+            {#each algorithms as element}
+                <option value={element}>
+                    {element.name}
+                </option>
+            {/each}
+        </select>
+    </section>
 </header>
 
 <section class="environment">
     <AceEditor on:input={(obj) => execute(obj.detail)} bind:value={defaultAlgorithm.algorithm}/>
-    <Maze/>
+    <Maze bind:graph={graph} bind:goal={goal} bind:source={source} bind:path={path}/>
 </section>
 
 <style>
@@ -46,5 +55,14 @@
         flex-flow: row wrap;
         margin: 1em 1em 1em 1em;
         justify-content: space-between;
+    }
+    .options {
+        display: flex;
+        flex-flow: row wrap;
+        margin: 1em 1em 1em 1em;
+        justify-content: space-around;
+    }
+    input {
+        width: 20%;
     }
 </style>
