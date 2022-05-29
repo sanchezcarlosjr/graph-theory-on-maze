@@ -1,4 +1,5 @@
-export function square(x, y, width = 1) {
+export function square(coordinates: number[], width = 1) {
+    const [x,y] = coordinates;
     const x1 = x;
     const x2 = x + width;
     const y1 = y;
@@ -33,8 +34,7 @@ export function makeMaze(cuts, graph): number[] {
     const cells = cuts ** 2;
     for (let n = 0; n < cells; n++) {
         if (graph.vertex(n.toString()).cost === 0) {
-            const [x, y] = coordinate.fromDiscreteToContinue(n);
-            vertices.push(...square(x, y, coordinate.WIDTH));
+            vertices.push(...square(coordinate.fromDiscreteToContinue(n), coordinate.WIDTH));
         }
     }
     return vertices;

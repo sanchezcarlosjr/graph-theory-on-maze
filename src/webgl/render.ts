@@ -2,7 +2,7 @@ import {shaders} from "../maze/shader";
 import {GLObject, VerticesAttribute} from "./GLObject";
 import {createProgramInfo, resizeCanvasToDisplaySize} from "./webgl";
 import {makeAGraphMaze} from "../Graph";
-import {makeMaze} from "../maze/program";
+import {Coordinate, makeMaze, square} from "../maze/program";
 
 export function config(gl) {
     resizeCanvasToDisplaySize(gl.canvas);
@@ -15,25 +15,56 @@ export function config(gl) {
 }
 
 export async function model(gl) {
-    const n = 50;
+    const n = 20;
     let [graph, source, goal] = makeAGraphMaze(n);
+    const coordinate = new Coordinate(n);
     const programsInfo = shaders.map((shader) => createProgramInfo(gl, [shader.vertex, shader.fragment]));
-    const maze = new GLObject(
-        programsInfo[0],
-        gl,
-        [
-            new VerticesAttribute({
-                gl,
-                programInfo: programsInfo[0],
-                name: "vertex",
-                vertices: makeMaze(n, graph),
-                numComponents: 2
-            })
-        ],
-        [],
-        gl.TRIANGLES
-    );
-    return [maze];
+    return [
+        new GLObject(
+            programsInfo[0],
+            gl,
+            [
+                new VerticesAttribute({
+                    gl,
+                    programInfo: programsInfo[0],
+                    name: "vertex",
+                    vertices: makeMaze(n, graph),
+                    numComponents: 2
+                })
+            ],
+            [],
+            gl.TRIANGLES
+        ),
+        new GLObject(
+            programsInfo[1],
+            gl,
+            [
+                new VerticesAttribute({
+                    gl,
+                    programInfo: programsInfo[1],
+                    name: "vertex",
+                    vertices: square(coordinate.fromDiscreteToContinue(source), coordinate.WIDTH),
+                    numComponents: 2
+                })
+            ],
+            [],
+            gl.LINE_LOOP
+        ), new GLObject(
+            programsInfo[2],
+            gl,
+            [
+                new VerticesAttribute({
+                    gl,
+                    programInfo: programsInfo[2],
+                    name: "vertex",
+                    vertices: square(coordinate.fromDiscreteToContinue(goal), coordinate.WIDTH),
+                    numComponents: 2
+                })
+            ],
+            [],
+            gl.LINE_LOOP
+        )
+    ];
 }
 
 export async function renderAnimation(gl, glObjects: GLObject[]) {
