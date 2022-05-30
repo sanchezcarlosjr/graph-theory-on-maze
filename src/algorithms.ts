@@ -3,12 +3,12 @@ export const algorithms = [
         id: 1,
         name: "Dijkstra",
         algorithm: `function find_shortest_path_by_dijkstra(G, source_vertex) {
-    const path = new Set();
-    const queue = new PriorityQueue(new BinaryHeap());
+    const path = [];
+    const queue = new PriorityQueue();
     queue.insert(G.vertices);
-    while (!queue.isEmpty()) {
-         const u = queue.extractMin();
-         path.add(u);
+    while (!queue.isEmpty) {
+         const u = queue.extractPeek();
+         path.push(u);
          for(const vertex of G.adj(u)) {
               const relaxHasDecreased = G.relax(u,v);
               if (relaxHasDecreased) {
@@ -57,5 +57,5 @@ export const algorithms = [
 ];
 
 export function build_function(algorithm) {
-    return new Function("G", "source_vertex", `return ${algorithm.toString()}(G, source_vertex)`);
+    return new Function("G", "source_vertex", `return ${algorithm}(G, source_vertex)`);
 }

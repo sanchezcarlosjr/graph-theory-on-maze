@@ -1,3 +1,3 @@
-import {Queue} from "./Queue";
+import {PriorityQueue} from "./data_structures/PriorityQueue";
 // @ts-ignore
-window.Queue = Queue;
+window.PriorityQueue = PriorityQueue;

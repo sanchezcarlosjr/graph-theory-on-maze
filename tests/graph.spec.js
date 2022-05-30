@@ -1,4 +1,4 @@
-import {Graph, makeAGraphMaze, findRandomSourceForMaze} from "../src/Graph";
+import {Graph, makeAGraphMaze, findRandomSourceForMaze} from "../src/data_structures/Graph";
 
 describe("Graph", () => {
     it("should add edge", () => {

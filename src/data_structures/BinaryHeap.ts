@@ -1,62 +1,5 @@
-import {Heap} from "./Heap";
-
-export class BinaryTree<T> {
-    constructor(private tree: T[] = []) {
-        return new Proxy(this, {
-            set: (target: BinaryTree<T>, key, value) => {
-                target.tree[key] = value;
-                return value;
-            }, get(target: BinaryTree<T>, key: string | symbol): any {
-                if (typeof key === 'string' && Number.isInteger(parseInt(key))) {
-                    return target.tree[key] ?? null;
-                }
-                return target[key];
-            }
-        });
-    }
-
-    get length() {
-        return this.tree.length;
-    }
-
-    get root() {
-        return this.tree[0];
-    }
-
-
-    equals(array: T[]): boolean {
-        if (array.length !== this.tree.length) {
-            return false;
-        }
-        return this.tree.reduce((previousValue, currentValue, index) => currentValue === array[index], true);
-    }
-
-    swap(i: number, j: number) {
-        [this.tree[i], this.tree[j]] = [this.tree[j], this.tree[i]];
-    }
-
-    deleteRoot() {
-        const root = this.tree[0];
-        this.tree.shift();
-        return root;
-    }
-
-    parent(index: number) {
-        return Math.floor(index);
-    }
-
-    getLeftIndex(index: number) {
-        return 2 * index + 1;
-    }
-
-    getRightIndex(index: number) {
-        return 2 * index + 2;
-    }
-
-    insert(...elements: T[]) {
-        this.tree.push(...elements);
-    }
-}
+import {Heap, searchIndex} from "./Heap";
+import {BinaryTree} from "./BinaryTree";
 
 
 export class BinaryHeap<T> extends Heap<T> {
@@ -77,13 +20,29 @@ export class BinaryHeap<T> extends Heap<T> {
     }
 
     extractPeek(): T {
-        const root = this.binaryTree.deleteRoot();
-        this.heapifyAll();
-        return root;
+        this.binaryTree.swap(0, this.binaryTree.length - 1);
+        const peek = this.binaryTree.deleteTail();
+        this.heapify(0);
+        return peek;
     }
 
-    insert(...element: T[]) {
-        this.binaryTree.insert(...element);
+    insert(...elements: T[]) {
+        elements.forEach((element) => {
+            this.binaryTree.insert(element);
+            let i = this.size - 1;
+            this.heapifyFrom(i);
+        });
+    }
+
+    heapifyFrom(i: number) {
+        while (i > 0 && this.compare(this.binaryTree[i], this.binaryTree[this.binaryTree.parent(i)])) {
+            this.binaryTree.swap(i, this.binaryTree.parent(i));
+            i = this.binaryTree.parent(i);
+        }
+    }
+
+    set(key: number, value: T) {
+        this.binaryTree[key] = value;
     }
 
     heapifyAll() {
@@ -97,13 +56,15 @@ export class BinaryHeap<T> extends Heap<T> {
     }
 
     heapify(root: number) {
-        const newRoot = this.comparator({
-            index: root, value: this.binaryTree[root]
-        }, {
-            index: this.binaryTree.getLeftIndex(root), value: this.binaryTree[this.binaryTree.getLeftIndex(root)],
-        }, {
-            index: this.binaryTree.getRightIndex(root), value: this.binaryTree[this.binaryTree.getRightIndex(root)]
-        });
+        const newRoot = searchIndex(
+            this.compare,
+            {
+                index: root, value: this.binaryTree[root]
+            }, {
+                index: this.binaryTree.getLeftIndex(root), value: this.binaryTree[this.binaryTree.getLeftIndex(root)],
+            }, {
+                index: this.binaryTree.getRightIndex(root), value: this.binaryTree[this.binaryTree.getRightIndex(root)]
+            });
         if (root !== newRoot && newRoot < this.size) {
             this.binaryTree.swap(root, newRoot);
             this.heapify(newRoot);

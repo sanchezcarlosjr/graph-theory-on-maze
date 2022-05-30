@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import {model, renderAnimation} from "./webgl/render";
-    import {makeAGraphMaze} from "./Graph";
+    import {makeAGraphMaze} from "./data_structures/Graph";
     let canvas;
     let gl;
     let n = 20;

@@ -2,7 +2,7 @@
     import AceEditor from "./AceEditor";
     import Maze from './Maze.svelte';
     import {algorithms, build_function} from "./algorithms";
-    import {Graph} from "./Graph";
+    import {Graph} from "./data_structures/Graph";
     let n = 20;
     let graph = new Graph();
     let source = "";
