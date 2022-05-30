@@ -1,25 +1,25 @@
 @startuml
-'https://plantuml.com/class-diagram
-class PriorityQueue {
+class PriorityQueue<T> {
  isEmpty
- insertWithPriority()
- pullHighestPriorityElement()
+ PriorityQueue(heap=new BinaryHeap())
+ insertAll(T[])
+ insert(T)
+ pull()
+ iterator
 }
 
 PriorityQueue --> Heap
-class Heap<T> {
+abstract class Heap<T> {
   heap: T[]
-  size
-  isEmpty
-  findMax()
-  findMin()
-  insert()
-  extractMax()
-  extractMin()
-  deleteMin()
-  deleteMax()
+  getSize()
+  Heap(comparator=min)
+  isEmpty()
+  insert(T)
+  getPeek(): T
+  extractPeek(): T
   replace()
   heapify()
+  iterator
   meld()
   merge(Heap)
 }

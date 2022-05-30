@@ -20,7 +20,7 @@ Navigate to [localhost:8080](http://localhost:8080). You should see your app run
 
 # Modelling
 ![Data structures](
- http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/jonashackt/plantuml-markdown/master/example-uml.iuml
+ http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/data_structures.puml
 )
 
 # Globals (Injected code)
