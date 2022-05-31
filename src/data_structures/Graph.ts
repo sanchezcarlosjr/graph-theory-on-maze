@@ -119,6 +119,16 @@ export class Graph {
         return this.graph.get(vertex);
     }
 
+    reconstruct_path(goal) {
+        let path = [];
+        let actualVertex = goal;
+        while(actualVertex !== undefined) {
+            path = [actualVertex, ...path];
+            actualVertex  = this.vertex(actualVertex).predecessor;
+        }
+        return path;
+    }
+
     hasEdge(vertexA: string, vertexB: string) {
         return this.graph.has(vertexA) &&
             this.graph.has(vertexB) &&

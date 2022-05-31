@@ -12,6 +12,9 @@ export const algorithms = [
     }
     while (!queue.isEmpty) {
         const vertex = queue.extractPeek();
+        if (vertex === goal) {
+          return graph.reconstruct_path(goal);
+        }
         for (const u of graph.getAdjacent(vertex)) {
             const relaxHasDecreased = graph.relax(vertex, u[0]);
             if (relaxHasDecreased) {
@@ -19,13 +22,7 @@ export const algorithms = [
             }
         }
     }
-    let path = [];
-    let actualVertex = goal;
-    while(actualVertex !== undefined) {
-        path = [actualVertex, ...path];
-        actualVertex  = graph.vertex(actualVertex).predecessor;
-    }
-    return path;
+    return [];
 }` },
     {
         id: 2,
