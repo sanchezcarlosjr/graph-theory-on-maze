@@ -49,10 +49,10 @@ describe('Heaps', () => {
     });
     describe("Binary tree", () => {
         const binaryTree = new BinaryTree([1, 2, 3, 4, 5, 6]);
-        binaryTree[0] = 4;
-        expect(binaryTree[0]).toBe(4);
-        expect(binaryTree[binaryTree.length]).toBe(null);
-        expect(binaryTree[1]).toBe(2);
+        binaryTree.set(4, 0);
+        expect(binaryTree.get(4)).toBe(0);
+        expect(binaryTree.get(binaryTree.length)).toBe(null);
+        expect(binaryTree.get(1)).toBe(2);
     });
     describe('Binary Heap', () => {
         it("should heapify base case", () => {
@@ -142,7 +142,7 @@ describe('Heaps', () => {
             expect(priorityQueue.extractPeek()).toBe("ABC");
             expect(priorityQueue.peek).toBe("A");
         });
-        it.only("should change key", () => {
+        it("should change key", () => {
             const priorityQueue = new PriorityQueue();
             priorityQueue.insert("X", 2);
             priorityQueue.insert("Y", 17);

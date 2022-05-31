@@ -6,8 +6,8 @@
     let gl;
     let n = 20;
     export let graph = undefined;
-    export let source = "";
-    export let goal = "";
+    export let source: string;
+    export let goal: string;
     export let path = [];
     [graph, source, goal] = makeAGraphMaze(n);
     let render = async (newPath) => {

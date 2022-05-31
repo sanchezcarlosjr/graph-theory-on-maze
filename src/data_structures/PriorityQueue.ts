@@ -37,11 +37,13 @@ export class PriorityQueue {
     }
 
     insert(key: string, value: number) {
-        if (!this.nodes.has(key)) {
-            const node = new Node(key, value);
-            this.heap.insert(node);
-            this.nodes.set(key, node);
+        if (this.nodes.has(key)) {
+            return;
         }
+        const node = new Node(key, value);
+        this.heap.insert(node);
+        this.nodes.set(key, node);
+        this.heap.heapifyAll();
     }
 
     extractPeek() {
@@ -52,12 +54,12 @@ export class PriorityQueue {
 
     changeKey(key: string, value: number) {
         if (!this.nodes.has(key)) {
-            throw new Error("Key is undefined");
+            return;
         }
         let node = this.nodes.get(key);
         node = new Node(node.key, value, node.position);
         this.nodes.set(key, node);
         this.heap.set(node.position, node);
-        this.heap.heapifyFrom(node.position);
+        this.heap.heapifyAll();
     }
 }

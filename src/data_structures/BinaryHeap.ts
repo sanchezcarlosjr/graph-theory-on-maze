@@ -3,7 +3,7 @@ import {BinaryTree} from "./BinaryTree";
 
 
 export class BinaryHeap<T> extends Heap<T> {
-    constructor(comparator = undefined, private binaryTree = new BinaryTree<T>()) {
+    constructor(comparator = undefined, private binaryTree = new BinaryTree<any>()) {
         super(comparator);
     }
 
@@ -35,14 +35,14 @@ export class BinaryHeap<T> extends Heap<T> {
     }
 
     heapifyFrom(i: number) {
-        while (i > 0 && this.compare(this.binaryTree[i], this.binaryTree[this.binaryTree.parent(i)])) {
+        while (i > 0 && this.compare(this.binaryTree.get(i), this.binaryTree.get(this.binaryTree.parent(i)))) {
             this.binaryTree.swap(i, this.binaryTree.parent(i));
             i = this.binaryTree.parent(i);
         }
     }
 
     set(key: number, value: T) {
-        this.binaryTree[key] = value;
+        this.binaryTree.set(key, value);
     }
 
     heapifyAll() {
@@ -59,11 +59,11 @@ export class BinaryHeap<T> extends Heap<T> {
         const newRoot = searchIndex(
             this.compare,
             {
-                index: root, value: this.binaryTree[root]
+                index: root, value: this.binaryTree.get(root)
             }, {
-                index: this.binaryTree.getLeftIndex(root), value: this.binaryTree[this.binaryTree.getLeftIndex(root)],
+                index: this.binaryTree.getLeftIndex(root), value: this.binaryTree.get(this.binaryTree.getLeftIndex(root)),
             }, {
-                index: this.binaryTree.getRightIndex(root), value: this.binaryTree[this.binaryTree.getRightIndex(root)]
+                index: this.binaryTree.getRightIndex(root), value: this.binaryTree.get(this.binaryTree.getRightIndex(root))
             });
         if (root !== newRoot && newRoot < this.size) {
             this.binaryTree.swap(root, newRoot);

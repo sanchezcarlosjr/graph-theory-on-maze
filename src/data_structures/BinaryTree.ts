@@ -1,16 +1,5 @@
 export class BinaryTree<T> {
     constructor(private tree: T[] = []) {
-        return new Proxy(this, {
-            set: (target: BinaryTree<T>, key, value) => {
-                target.tree[key] = value;
-                return value;
-            }, get(target: BinaryTree<T>, key: string | symbol): any {
-                if (typeof key === 'string' && Number.isInteger(parseInt(key))) {
-                    return target.tree[key] ?? null;
-                }
-                return target[key];
-            }
-        });
     }
 
     get length() {
@@ -22,10 +11,18 @@ export class BinaryTree<T> {
     }
 
     private static setPosition(element, index) {
-        if (element.hasOwnProperty("position")) {
+        if (element.hasOwnProperty("_position")) {
             // @ts-ignore
             element.position = index;
         }
+    }
+
+    get(index: number) {
+        return this.tree[index] ?? null;
+    }
+
+    set(index: number, value: T) {
+        this.tree[index] = value;
     }
 
     equals(array: T[]): boolean {
@@ -51,6 +48,10 @@ export class BinaryTree<T> {
         return this.tree.pop();
     }
 
+    show() {
+        console.log(this.tree.map((r) => r.toString()));
+    }
+
     parent(index: number) {
         return Math.floor(index / 2);
     }
@@ -66,6 +67,7 @@ export class BinaryTree<T> {
     insert(...elements: T[]) {
         elements.forEach((element) => {
             this.tree.push(element);
+            BinaryTree.setPosition(this.tree[this.length-1], this.length-1);
         });
     }
 }

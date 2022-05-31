@@ -3,7 +3,6 @@
     import Maze from './Maze.svelte';
     import {algorithms, build_function} from "./algorithms";
     import {Graph} from "./data_structures/Graph";
-    let n = 20;
     let graph = new Graph();
     let source = "";
     let goal = "";
@@ -19,8 +18,8 @@
     let algorithm = "";
     const execute = (obj) => {
         if (obj.validSyntax && algorithm !== obj.value) {
-            path = build_function(obj.value)(graph, source);
             algorithm = obj.value;
+            path = build_function(algorithm)(graph, source, goal);
         }
     }
 </script>
