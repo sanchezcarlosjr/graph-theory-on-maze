@@ -1,18 +1,17 @@
 import type {Graph} from "../data_structures/Graph";
 
-enum STATE {
+
+export enum STATE {
     STOP, MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT,
 }
+
 
 export class Movement {
     private vertex = 0;
     private currentState: STATE = STATE.STOP;
     private states = [{
         "RESPONSE": [0, 0, 0], transits: () => {
-            if (this.vertex >= this.path.length ||
-                this.vertex+1 < this.path.length && this.graph.vertex(this.path[this.vertex+1].toString()).cost === Infinity ||
-                this.path[this.vertex].toString() === this.goal
-            ) {
+            if (this.vertex >= this.path.length || this.vertex + 1 < this.path.length && this.graph.vertex(this.path[this.vertex + 1].toString()).cost === Infinity || this.path[this.vertex].toString() === this.goal) {
                 return STATE.STOP;
             }
             if (+this.path[this.vertex] === +this.path[this.vertex + 1] + this.n) {
@@ -67,14 +66,7 @@ export class Movement {
         }
     }];
 
-    constructor(
-        private speed: number,
-        private path: any[],
-        private n: number,
-        private frame: number,
-        private graph: Graph,
-        private goal: string
-    ) {
+    constructor(private speed: number, private path: any[], private n: number, private frame: number, private graph: Graph, private goal: string) {
     }
 
     transits(x, y) {
