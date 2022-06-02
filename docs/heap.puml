@@ -3,12 +3,15 @@ class PriorityQueue<T> {
  isEmpty
  PriorityQueue(heap=new BinaryHeap())
  insert(key, value)
- pull()
+ extractPeek()
+ changeKey(key, value)
 }
 
+class BinaryTree<T> {}
+
 PriorityQueue --> Heap
+
 abstract class Heap<T extends Number> {
-  heap: T[]
   getSize()
   Heap(comparator=min)
   isEmpty()
@@ -17,12 +20,12 @@ abstract class Heap<T extends Number> {
   extractPeek(): T
   replace()
   heapify()
-  iterator
   meld()
   merge(Heap)
 }
 
 class BinaryHeap extends Heap
+BinaryHeap o-- BinaryTree
 class LeftistHeap extends Heap
 class BinomialHeap extends Heap
 class FibonacciHeap extends Heap
