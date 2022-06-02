@@ -1,4 +1,6 @@
 @startuml
+skinparam groupInheritance 4
+
 class PriorityQueue<T> {
  isEmpty
  PriorityQueue(heap=new BinaryHeap())
@@ -9,7 +11,7 @@ class PriorityQueue<T> {
 
 class BinaryTree<T> {}
 
-PriorityQueue --> Heap
+PriorityQueue  -right--> Heap
 
 abstract class Heap<T extends Number> {
   getSize()

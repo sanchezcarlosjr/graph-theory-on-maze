@@ -1,9 +1,0 @@
-@startuml
-class Store {
-  Store(state, reducer)
-  dispatch(action)
-}
-note left
-Reducer: Pattern matching
-end note
-@enduml

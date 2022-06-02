@@ -22,8 +22,8 @@ Navigate to [localhost:8080](http://localhost:8080). You should see your app run
 ![Maze](
 http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/maze.puml
 )
-![Extended finite-state machine](
-http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/extended_finite_state_machine.puml
+![Movement player](
+http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/player-movement.puml
 )
 ![Heap](
 http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/heap.puml

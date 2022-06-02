@@ -1,0 +1,42 @@
+It's an extended finite-state machine.
+A extensible solution is using Pattern Matching.
+
+@startuml
+
+[*] --> Stop
+
+Stop --> Stop: Player lies goal or end of the road
+Stop : Δx=0
+Stop : Δy=0
+Stop : Δz=0
+
+Stop --> MoveUp: next vertex is up
+MoveUp : Δx=0
+MoveUp : Δy=speed
+MoveUp : Δz=0
+MoveUp --> Stop: player lies the next vertex/vertex++
+MoveUp --> MoveUp: player doesn't lie the next vertex
+
+Stop --> MoveRight: next vertex is right
+MoveRight : Δx=speed
+MoveRight : Δy=0
+MoveRight : Δz=0
+MoveRight --> Stop: player lies the next vertex/vertex++
+MoveRight --> MoveRight: player doesn't lie the next vertex
+
+Stop --> MoveDown: next vertex is down
+MoveDown : Δx=0
+MoveDown : Δy=-speed
+MoveDown : Δz=0
+MoveDown --> Stop: player lies the next vertex/vertex++
+MoveDown --> MoveDown: player doesn't lie the next vertex
+
+Stop --> MoveLeft: next vertex is left
+MoveLeft : Δx=-speed
+MoveLeft : Δy=0
+MoveLeft : Δz=0
+MoveLeft --> Stop: player lies the next vertex/vertex++
+MoveLeft --> MoveLeft: player doesn't lie the next vertex
+
+
+@enduml
