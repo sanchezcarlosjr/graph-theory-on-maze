@@ -1,0 +1,13 @@
+@startuml
+class Graph {
+   addDirectedEdge(vertexA, vertexB)
+   addNoDirectedEdge(vertexA, vertexB)
+   edge(vertexA, vertexB)
+   vertex(vertex)
+   reconstruct_path(vertex)
+   hasEdge(vertexA, vertexB)
+   weight(vertexA, vertexB)
+   relax(vertexA, vertexB)
+   initialize_single_source(source)
+}
+@enduml

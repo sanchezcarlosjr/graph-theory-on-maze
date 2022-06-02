@@ -2,7 +2,7 @@ import {Heap, searchIndex} from "./Heap";
 import {BinaryTree} from "./BinaryTree";
 
 
-export class BinaryHeap<T> extends Heap<T> {
+export class BinaryHeap<T extends Number> extends Heap<T> {
     constructor(comparator = undefined, private binaryTree = new BinaryTree<any>()) {
         super(comparator);
     }

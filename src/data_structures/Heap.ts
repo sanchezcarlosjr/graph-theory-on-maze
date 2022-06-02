@@ -16,7 +16,7 @@ export function maxHeap(a: number, b: number): boolean {
     return a > b;
 }
 
-export abstract class Heap<T> {
+export abstract class Heap<T extends Number> {
     protected constructor(protected compare: Comparator = minHeap) {
     }
 

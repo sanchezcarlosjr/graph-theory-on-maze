@@ -19,8 +19,14 @@ npm run dev
 Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and the page should reload with your changes.
 
 # Modelling
-![Data structures](
- http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/data_structures.puml
+![Heap](
+ http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/heap.puml
+)
+![Maze](
+http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/maze.puml
+)
+![Extended finite-state machine](
+http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/extended_finite_state_machine.puml
 )
 
 # Globals (Injected code)

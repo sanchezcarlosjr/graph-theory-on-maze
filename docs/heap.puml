@@ -2,19 +2,17 @@
 class PriorityQueue<T> {
  isEmpty
  PriorityQueue(heap=new BinaryHeap())
- insertAll(T[])
- insert(T)
+ insert(key, value)
  pull()
- iterator
 }
 
 PriorityQueue --> Heap
-abstract class Heap<T> {
+abstract class Heap<T extends Number> {
   heap: T[]
   getSize()
   Heap(comparator=min)
   isEmpty()
-  insert(T)
+  insert(...T)
   getPeek(): T
   extractPeek(): T
   replace()
