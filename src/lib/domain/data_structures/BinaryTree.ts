@@ -24,7 +24,9 @@ export class BinaryTree<T> {
     }
 
     set(index: number, value: T) {
+        const previousValue = this.tree[index];
         this.tree[index] = value;
+        return previousValue;
     }
 
     equals(array: T[]): boolean {

@@ -14,17 +14,37 @@ describe('Heap', function () {
         });
     });
     describe('Binary heap', () => {
-        it('should heapify a node top down', () => {
+        it("should set node and keep max heap property when it increases", () => {
+            const heap = new BinaryHeap(maxHeap, new BinaryTree([20, 16, 10, 14, 7, 9, 3, 2, 4, 1]));
+            heap.set(1, 30);
+            expect(heap.equals([30, 20, 10, 14, 7, 9, 3, 2, 4, 1])).toBeTruthy();
+        });
+        it("should set node and keep max heap property when it decrease", () => {
+            const heap = new BinaryHeap(maxHeap, new BinaryTree([20, 16, 10, 14, 7, 9, 3, 2, 4, 1]));
+            heap.set(1, -1);
+            expect(heap.equals([20, 14, 10, 4, 7, 9, 3, 2, -1, 1])).toBeTruthy();
+        });
+        it("should set node and keep min heap property when it increases", () => {
+            const heap = new BinaryHeap(minHeap, new BinaryTree([1, 2, 3, 4, 7, 9, 10, 14, 20, 16]));
+            heap.set(5, -1);
+            expect(heap.equals([-1, 2, 1, 4, 7, 3, 10, 14, 20, 16])).toBeTruthy();
+        });
+        it("should set node and keep min heap property when it decrease", () => {
+            const heap = new BinaryHeap(minHeap, new BinaryTree([1, 2, 3, 4, 7, 9, 10, 14, 20, 16, 50, 70]));
+            heap.set(2, 100);
+            expect(heap.equals([1, 2, 9, 4, 7, 70, 10, 14, 20, 16, 50, 100])).toBeTruthy();
+        });
+        it('should sift a node top down', () => {
             const heap = new BinaryHeap(maxHeap, new BinaryTree([16, 4, 10, 14, 7, 9, 3, 2, 8, 1]));
             heap.siftDown(1);
             expect(heap.equals([16, 14, 10, 8, 7, 9, 3, 2, 4, 1])).toBeTruthy();
         });
-        it('should heapify top down a node with infinity', () => {
+        it('should sift top down a node with infinity', () => {
             const heap = new BinaryHeap(minHeap, new BinaryTree([Infinity, 0, Infinity, -1, 10, Infinity, 10, Infinity, 1000]));
             heap.siftDown(1);
             expect(heap.equals([Infinity, -1, Infinity, 0, 10, Infinity, 10, Infinity, 1000])).toBeTruthy();
         });
-        it('should heapify a node bottom up', () => {
+        it('should sift a node bottom up', () => {
             const heap = new BinaryHeap(maxHeap, new BinaryTree([16, 4, 10, 14, 7, 9, 3, 2, 20, 1]));
             heap.siftUp(heap.size - 2);
             expect(heap.equals([20, 16, 10, 4, 7, 9, 3, 2, 14, 1])).toBeTruthy();

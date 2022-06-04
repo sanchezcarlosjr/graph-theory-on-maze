@@ -38,9 +38,14 @@ export class BinaryHeap<T extends number> extends Heap<T> {
     }
 
     set(key: number, value: T) {
-        this.binaryTree.set(key, value);
-        this.siftUp(key);
+        const previousValue = this.binaryTree.set(key, value);
+        if (this.compare(value, previousValue)) {
+            return this.siftUp(key);
+        }
+        this.siftDown(key);
+        return previousValue;
     }
+
 
     heapify() {
         for (let i = Math.floor(this.size / 2); i >= 0; i--) {
