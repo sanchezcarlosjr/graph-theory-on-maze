@@ -1,8 +1,8 @@
-import { Heap, searchIndex } from './Heap';
+import { type Comparator, Heap, minHeap, searchIndex} from './Heap';
 import { BinaryTree } from './BinaryTree';
 
 export class BinaryHeap<T extends number> extends Heap<T> {
-	constructor(comparator = undefined, private binaryTree = new BinaryTree<any>()) {
+	constructor(comparator: Comparator = minHeap, private binaryTree = new BinaryTree<any>()) {
 		super(comparator);
 	}
 
@@ -21,25 +21,23 @@ export class BinaryHeap<T extends number> extends Heap<T> {
 	extractPeek(): T {
 		this.binaryTree.swap(0, this.binaryTree.length - 1);
 		const peek = this.binaryTree.deleteTail();
-		this.heapify(0);
+		this.heapifyTopDown(0);
 		return peek;
 	}
 
-	insert(...elements: T[]) {
-		elements.forEach((element) => {
-			this.binaryTree.insert(element);
-			const i = this.size - 1;
-			this.heapifyFrom(i);
-		});
+	insert(element: T) {
+		this.binaryTree.insert(element);
+		const i = this.size - 1;
+		this.heapifyBottomUp(i);
 	}
 
-	heapifyFrom(i: number) {
+	heapifyBottomUp(root: number) {
 		while (
-			i > 0 &&
-			this.compare(this.binaryTree.get(i), this.binaryTree.get(this.binaryTree.parent(i)))
+			root > 0 &&
+			this.compare(this.binaryTree.get(root), this.binaryTree.get(this.binaryTree.parent(root)))
 		) {
-			this.binaryTree.swap(i, this.binaryTree.parent(i));
-			i = this.binaryTree.parent(i);
+			this.binaryTree.swap(root, this.binaryTree.parent(root));
+			root = this.binaryTree.parent(root);
 		}
 	}
 
@@ -49,7 +47,7 @@ export class BinaryHeap<T extends number> extends Heap<T> {
 
 	heapifyAll() {
 		for (let i = Math.floor(this.size / 2); i >= 0; i--) {
-			this.heapify(i);
+			this.heapifyTopDown(i);
 		}
 	}
 
@@ -57,8 +55,16 @@ export class BinaryHeap<T extends number> extends Heap<T> {
 		return this.binaryTree.equals(array);
 	}
 
-	heapify(root: number) {
-		const newRoot = searchIndex(
+	heapifyTopDown(node: number) {
+		let localNode;
+		while(node !== (localNode = this.searchLocalNodeByComparison(node)) && localNode < this.size) {
+			this.binaryTree.swap(node, localNode);
+			node = localNode;
+		}
+	}
+
+	private searchLocalNodeByComparison(root: number) {
+		return searchIndex(
 			this.compare,
 			{
 				index: root,
@@ -73,9 +79,5 @@ export class BinaryHeap<T extends number> extends Heap<T> {
 				value: this.binaryTree.get(this.binaryTree.getRightIndex(root))
 			}
 		);
-		if (root !== newRoot && newRoot < this.size) {
-			this.binaryTree.swap(root, newRoot);
-			this.heapify(newRoot);
-		}
 	}
 }

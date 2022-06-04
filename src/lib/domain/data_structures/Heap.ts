@@ -7,8 +7,8 @@ export function searchIndex(f: Comparator, ...objects: { index: Index; value: nu
 	].index;
 }
 
-type Index = number;
-type Comparator = (a: number, b: number) => boolean;
+export type Index = number;
+export type Comparator = (a: number, b: number) => boolean;
 
 export function minHeap(a: number, b: number): boolean {
 	return a < b;
@@ -27,7 +27,7 @@ export abstract class Heap<T extends number> {
 
 	abstract get peek(): T;
 
-	abstract insert(...element: T[]): void;
+	abstract insert(element: T): void;
 
 	abstract extractPeek(): T;
 }
