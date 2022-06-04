@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import {makeAGraphMaze} from "$lib/domain/data_structures/Graph";
     import {model, renderAnimation} from "$lib/infrastructure/webgl/render";
+    import {makeAMaze} from "$lib/domain/MakeAMaze";
     let canvas;
     let gl;
     let n = 20;
@@ -9,7 +9,7 @@
     export let source: string;
     export let goal: string;
     export let path = [];
-    [graph, source, goal] = makeAGraphMaze(n);
+    [graph, source, goal] = makeAMaze(n);
     let render = async (newPath) => {
         if (!gl) {
             return;
