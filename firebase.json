@@ -1,7 +1,7 @@
 {
   "hosting": {
     "site": "graph-theory",
-    "public": "public",
+    "public": "build",
     "ignore": [
       "firebase.json",
       "**/.*",
