@@ -1,4 +1,5 @@
 # Maze graph theory
+
 https://graph-theory.sanchezcarlosjr.com/
 
 ## Creating a project
@@ -34,16 +35,12 @@ You can preview the production build with `npm run preview`.
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
 # Modelling
-![Maze](
-http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/maze.puml
-)
-![Movement player](
-http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/player-movement.puml
-)
-![Heap](
-http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/heap.puml
-)
+
+![Maze](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/maze.puml)
+![Movement player](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/player-movement.puml)
+![Heap](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sanchezcarlosjr/graph-theory-on-maze/main/docs/heap.puml)
 
 # Globals (Injected code)
+
 Because it's expected in CLRS and other books we've chosen to develop our
-standard built-in objects. See more in main.js 
+standard built-in objects. See more in main.js

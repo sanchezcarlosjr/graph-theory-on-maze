@@ -1,6 +1,6 @@
 export const shaders = [
-    {
-        fragment: `
+	{
+		fragment: `
             precision mediump float;
             
             void main()
@@ -8,16 +8,16 @@ export const shaders = [
                 gl_FragColor = vec4(1,1,1,1);
             }
         `,
-        vertex: `
+		vertex: `
             attribute vec4 vertex;
             
             void main() {
                 gl_Position = vertex;
             }
         `
-    },
-    {
-        fragment: `
+	},
+	{
+		fragment: `
             precision mediump float;
             
             void main()
@@ -25,7 +25,7 @@ export const shaders = [
                 gl_FragColor = vec4(255,0,0,0.6);
             }
         `,
-        vertex: `
+		vertex: `
             attribute vec4 vertex;
             uniform mat4 transformation;
             
@@ -33,9 +33,9 @@ export const shaders = [
                 gl_Position = transformation*vertex;
             }
         `
-    },
-    {
-        fragment: `
+	},
+	{
+		fragment: `
             precision mediump float;
             
             void main()
@@ -43,12 +43,12 @@ export const shaders = [
                 gl_FragColor = vec4(255,215,0,1);
             }
         `,
-        vertex: `
+		vertex: `
              attribute vec4 vertex;
             
             void main() {
                 gl_Position = vertex;
             }
         `
-    }
+	}
 ];
