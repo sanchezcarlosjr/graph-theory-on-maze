@@ -2,7 +2,7 @@ import {type Comparator, Heap, minHeap, searchIndex} from './Heap';
 import {BinaryTree} from './BinaryTree';
 
 export class BinaryHeap<T extends number> extends Heap<T> {
-    constructor(comparator: Comparator = minHeap, private binaryTree = new BinaryTree<any>()) {
+    constructor(comparator: Comparator = minHeap, protected binaryTree = new BinaryTree<any>()) {
         super(comparator);
     }
 
@@ -35,6 +35,7 @@ export class BinaryHeap<T extends number> extends Heap<T> {
             this.binaryTree.swap(node, this.binaryTree.parent(node));
             node = this.binaryTree.parent(node);
         }
+        return node;
     }
 
     set(key: number, value: T) {
@@ -63,9 +64,10 @@ export class BinaryHeap<T extends number> extends Heap<T> {
             this.binaryTree.swap(node, localNode);
             node = localNode;
         }
+        return node;
     }
 
-    private searchLocalNodeByComparison(root: number) {
+    protected searchLocalNodeByComparison(root: number) {
         return searchIndex(this.compare, {
             index: root, value: this.binaryTree.get(root)
         }, {

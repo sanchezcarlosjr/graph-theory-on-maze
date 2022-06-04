@@ -49,6 +49,13 @@ export class Maze extends Graph {
 		return [source, goal];
 	}
 
+	isNotBorder(i: number) {
+		return i >= this.side &&
+			i % this.side !== 0 &&
+			(i - this.side + 1) % this.side !== 0 &&
+			i < this.side**2 - this.side;
+	}
+
 	buildBorders() {
 		for (let i = 0; i < this.side ** 2; i++) {
 			if ((i - this.side + 1) % this.side !== 0) {

@@ -2,6 +2,8 @@ import {BinaryHeap} from "../src/lib/domain/data_structures/BinaryHeap";
 import {BinaryTree} from "../src/lib/domain/data_structures/BinaryTree";
 import {maxHeap, minHeap} from "../src/lib/domain/data_structures/Heap";
 import {PriorityQueue} from "../src/lib/domain/data_structures/PriorityQueue";
+import {randomArray} from "../src/lib/domain/data_structures/RandomBetweenNumbers";
+Math.random = () => 0;
 
 describe('Heap', function () {
     describe('Binary Tree', () => {
@@ -114,6 +116,11 @@ describe('Heap', function () {
             expect(queue.extractPeek()).toBe("B");
             queue.replace("I", 6);
             expect(queue.extractPeek()).toBe("H");
+        });
+    });
+    describe("Randomized Binary heap", () => {
+        it('should make a random array', () => {
+            expect(randomArray(1,2,3)[1]).toEqual([2,3,1]);
         });
     });
 });
