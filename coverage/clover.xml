@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1654375113754" clover="3.2.0">
-  <project timestamp="1654375113754" name="All files">
+<coverage generated="1654376466346" clover="3.2.0">
+  <project timestamp="1654376466346" name="All files">
     <metrics statements="88" coveredstatements="76" conditionals="25" coveredconditionals="19" methods="43" coveredmethods="37" elements="156" coveredelements="132" complexity="0" loc="88" ncloc="88" packages="1" files="4" classes="4"/>
     <file name="BinaryHeap.ts" path="/home/sanchezcarlosjr/Workspace/maze-graph-theory/src/lib/domain/data_structures/BinaryHeap.ts">
       <metrics statements="26" coveredstatements="24" conditionals="6" coveredconditionals="6" methods="12" coveredmethods="10"/>
@@ -18,18 +18,18 @@
       <line num="25" count="15" type="stmt"/>
       <line num="29" count="33" type="stmt"/>
       <line num="30" count="33" type="stmt"/>
-      <line num="34" count="37" type="stmt"/>
-      <line num="38" count="34" type="stmt"/>
-      <line num="39" count="34" type="stmt"/>
-      <line num="44" count="3" type="stmt"/>
-      <line num="45" count="3" type="stmt"/>
-      <line num="49" count="1" type="stmt"/>
-      <line num="50" count="6" type="stmt"/>
-      <line num="55" count="7" type="stmt"/>
-      <line num="60" count="23" type="cond" truecount="2" falsecount="0"/>
-      <line num="61" count="22" type="stmt"/>
-      <line num="62" count="22" type="stmt"/>
-      <line num="67" count="45" type="stmt"/>
+      <line num="34" count="37" type="cond" truecount="2" falsecount="0"/>
+      <line num="35" count="34" type="stmt"/>
+      <line num="36" count="34" type="stmt"/>
+      <line num="41" count="3" type="stmt"/>
+      <line num="42" count="3" type="stmt"/>
+      <line num="46" count="1" type="stmt"/>
+      <line num="47" count="6" type="stmt"/>
+      <line num="52" count="7" type="stmt"/>
+      <line num="57" count="23" type="cond" truecount="2" falsecount="0"/>
+      <line num="58" count="22" type="stmt"/>
+      <line num="59" count="22" type="stmt"/>
+      <line num="64" count="45" type="stmt"/>
     </file>
     <file name="BinaryTree.ts" path="/home/sanchezcarlosjr/Workspace/maze-graph-theory/src/lib/domain/data_structures/BinaryTree.ts">
       <metrics statements="25" coveredstatements="20" conditionals="7" coveredconditionals="6" methods="16" coveredmethods="14"/>

@@ -21,20 +21,17 @@ export class BinaryHeap<T extends number> extends Heap<T> {
     extractPeek(): T {
         this.binaryTree.swap(0, this.binaryTree.length - 1);
         const peek = this.binaryTree.deleteTail();
-        this.heapifyTopDown(0);
+        this.siftDown(0);
         return peek;
     }
 
     insert(element: T) {
         this.binaryTree.insert(element);
-        this.heapifyBottomUp(this.size-1);
+        this.siftUp(this.size - 1);
     }
 
-    heapifyBottomUp(node: number) {
-        while (
-            node > 0 &&
-            this.compare(this.binaryTree.get(node), this.binaryTree.get(this.binaryTree.parent(node)))
-            ) {
+    siftUp(node: number) {
+        while (node > 0 && this.compare(this.binaryTree.get(node), this.binaryTree.get(this.binaryTree.parent(node)))) {
             this.binaryTree.swap(node, this.binaryTree.parent(node));
             node = this.binaryTree.parent(node);
         }
@@ -42,12 +39,12 @@ export class BinaryHeap<T extends number> extends Heap<T> {
 
     set(key: number, value: T) {
         this.binaryTree.set(key, value);
-        this.heapifyBottomUp(key);
+        this.siftUp(key);
     }
 
-    heapifyAll() {
+    heapify() {
         for (let i = Math.floor(this.size / 2); i >= 0; i--) {
-            this.heapifyTopDown(i);
+            this.siftDown(i);
         }
     }
 
@@ -55,7 +52,7 @@ export class BinaryHeap<T extends number> extends Heap<T> {
         return this.binaryTree.equals(array);
     }
 
-    heapifyTopDown(node: number) {
+    siftDown(node: number) {
         let localNode;
         while (node !== (localNode = this.searchLocalNodeByComparison(node)) && localNode < this.size) {
             this.binaryTree.swap(node, localNode);
@@ -64,20 +61,12 @@ export class BinaryHeap<T extends number> extends Heap<T> {
     }
 
     private searchLocalNodeByComparison(root: number) {
-        return searchIndex(
-            this.compare,
-            {
-                index: root,
-                value: this.binaryTree.get(root)
-            },
-            {
-                index: this.binaryTree.getLeftIndex(root),
-                value: this.binaryTree.get(this.binaryTree.getLeftIndex(root))
-            },
-            {
-                index: this.binaryTree.getRightIndex(root),
-                value: this.binaryTree.get(this.binaryTree.getRightIndex(root))
-            }
-        );
+        return searchIndex(this.compare, {
+            index: root, value: this.binaryTree.get(root)
+        }, {
+            index: this.binaryTree.getLeftIndex(root), value: this.binaryTree.get(this.binaryTree.getLeftIndex(root))
+        }, {
+            index: this.binaryTree.getRightIndex(root), value: this.binaryTree.get(this.binaryTree.getRightIndex(root))
+        });
     }
 }

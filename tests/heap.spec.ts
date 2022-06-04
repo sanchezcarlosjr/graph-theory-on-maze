@@ -16,17 +16,17 @@ describe('Heap', function () {
     describe('Binary heap', () => {
         it('should heapify a node top down', () => {
             const heap = new BinaryHeap(maxHeap, new BinaryTree([16, 4, 10, 14, 7, 9, 3, 2, 8, 1]));
-            heap.heapifyTopDown(1);
+            heap.siftDown(1);
             expect(heap.equals([16, 14, 10, 8, 7, 9, 3, 2, 4, 1])).toBeTruthy();
         });
         it('should heapify top down a node with infinity', () => {
             const heap = new BinaryHeap(minHeap, new BinaryTree([Infinity, 0, Infinity, -1, 10, Infinity, 10, Infinity, 1000]));
-            heap.heapifyTopDown(1);
+            heap.siftDown(1);
             expect(heap.equals([Infinity, -1, Infinity, 0, 10, Infinity, 10, Infinity, 1000])).toBeTruthy();
         });
         it('should heapify a node bottom up', () => {
             const heap = new BinaryHeap(maxHeap, new BinaryTree([16, 4, 10, 14, 7, 9, 3, 2, 20, 1]));
-            heap.heapifyBottomUp(heap.size - 2);
+            heap.siftUp(heap.size - 2);
             expect(heap.equals([20, 16, 10, 4, 7, 9, 3, 2, 14, 1])).toBeTruthy();
         });
         it("should keep heap property when client inserts", () => {
@@ -42,7 +42,7 @@ describe('Heap', function () {
         });
         it("should keep heap property when client build heap all", () => {
             const heap = new BinaryHeap(maxHeap, new BinaryTree([16, 4, 10, 14, 7, 9, 3, 2, 20, 1]));
-            heap.heapifyAll();
+            heap.heapify();
             expect(heap.equals([20, 16, 10, 14, 7, 9, 3, 2, 4, 1])).toBeTruthy();
         });
     });
@@ -88,11 +88,11 @@ describe('Heap', function () {
             queue.insert("G", -1);
             queue.insert("H", -2);
             queue.insert("I", 100);
-            queue.changeKey("A", -5);
+            queue.replace("A", -5);
             expect(queue.extractPeek()).toBe("A");
-            queue.changeKey("B", -3);
+            queue.replace("B", -3);
             expect(queue.extractPeek()).toBe("B");
-            queue.changeKey("I", 6);
+            queue.replace("I", 6);
             expect(queue.extractPeek()).toBe("H");
         });
     });

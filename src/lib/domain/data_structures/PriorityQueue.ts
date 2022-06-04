@@ -49,7 +49,7 @@ export class PriorityQueue {
 		return node?.key;
 	}
 
-	changeKey(key: string, value: number) {
+	replace(key: string, value: number) {
 		if (!this.nodes.has(key)) {
 			return;
 		}
