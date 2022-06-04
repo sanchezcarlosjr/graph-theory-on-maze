@@ -30,7 +30,7 @@ export const algorithms: Algorithm[] = [
         for (const u of graph.getAdjacent(vertex)) {
             const relaxHasDecreased = graph.relax(vertex, u[0]);
             if (relaxHasDecreased) {
-                queue.changeKey(u[0], graph.vertex(u[0]).distance);
+                queue.replace(u[0], graph.vertex(u[0]).distance);
             }
         }
     }
