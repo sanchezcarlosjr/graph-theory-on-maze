@@ -55,7 +55,7 @@ export class BinaryTree<T> {
     }
 
     parent(index: number) {
-        return Math.floor(index / 2);
+        return Math.ceil(index/2)-1;
     }
 
     getLeftIndex(index: number) {

@@ -41,7 +41,6 @@ export class PriorityQueue {
 		const node = new Node(key, value);
 		this.heap.insert(node);
 		this.nodes.set(key, node);
-		this.heap.heapifyAll();
 	}
 
 	extractPeek() {
@@ -58,6 +57,5 @@ export class PriorityQueue {
 		node = new Node(node.key, value, node.position);
 		this.nodes.set(key, node);
 		this.heap.set(node.position, node);
-		this.heap.heapifyAll();
 	}
 }
