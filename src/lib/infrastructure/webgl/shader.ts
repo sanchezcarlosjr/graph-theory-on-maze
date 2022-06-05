@@ -5,7 +5,7 @@ export const shaders = [
             
             void main()
             {
-                gl_FragColor = vec4(1,1,1,1);
+                gl_FragColor = vec4(0,0,0,1);
             }
         `,
 		vertex: `
@@ -40,7 +40,7 @@ export const shaders = [
             
             void main()
             {
-                gl_FragColor = vec4(255,215,0,1);
+                gl_FragColor = vec4(0.9294117647058824,0.5490196078431373, 0.2980392156862745 ,1);
             }
         `,
 		vertex: `

@@ -56,6 +56,11 @@ export class Maze extends Graph {
 			i < this.side**2 - this.side;
 	}
 
+	toEuclidean(i: string) {
+		const vertex = parseInt(i);
+		return [vertex%this.side, Math.floor(vertex/this.side)];
+	}
+
 	buildBorders() {
 		for (let i = 0; i < this.side ** 2; i++) {
 			if ((i - this.side + 1) % this.side !== 0) {

@@ -10,7 +10,7 @@ import { Movement } from './movement';
 export function config(gl) {
 	resizeCanvasToDisplaySize(gl.canvas);
 	gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-	gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
+	gl.clearColor(0.07, 0.28, 0.470, 1.0); // Clear to black, fully opaque
 	gl.clearDepth(1.0); // Clear everything
 	gl.enable(gl.DEPTH_TEST); // Enable depth testing
 	gl.depthFunc(gl.LEQUAL); // Near things obscure far things
@@ -49,6 +49,21 @@ export async function model(gl, n = 20, graph, source, goal, path) {
 			gl.TRIANGLES
 		),
 		new GLObject(
+			programsInfo[2],
+			gl,
+			[
+				new VerticesAttribute({
+					gl,
+					programInfo: programsInfo[2],
+					name: 'vertex',
+					vertices: square(coordinate.fromDiscreteToContinue(parseInt(goal)), coordinate.WIDTH),
+					numComponents: 2
+				})
+			],
+			[],
+			gl.TRIANGLES
+		),
+		new GLObject(
 			programsInfo[1],
 			gl,
 			[
@@ -81,21 +96,6 @@ export async function model(gl, n = 20, graph, source, goal, path) {
 			],
 			gl.TRIANGLES
 		),
-		new GLObject(
-			programsInfo[2],
-			gl,
-			[
-				new VerticesAttribute({
-					gl,
-					programInfo: programsInfo[2],
-					name: 'vertex',
-					vertices: square(coordinate.fromDiscreteToContinue(parseInt(goal)), coordinate.WIDTH),
-					numComponents: 2
-				})
-			],
-			[],
-			gl.TRIANGLES
-		)
 	];
 }
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

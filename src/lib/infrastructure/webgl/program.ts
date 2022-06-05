@@ -7,6 +7,12 @@ export function square(coordinates: number[], width = 1) {
 	return [x1, y1, x2, y1, x1, y2, x2, y1, x2, y2, x1, y2];
 }
 
+export function circle(coordinates: number[], width=1) {
+	const [x, y] = coordinates;
+	const radius = width/2;
+	return [x+radius, y-radius, x+radius, y, x, y-radius];
+}
+
 export class Coordinate {
 	private readonly CARTESIAN_SIZE: number = 2;
 	private readonly REFERENCE_X: number = -1;
