@@ -6,7 +6,6 @@
 	import AceEditor from '$lib/components/AceEditor.svelte';
 	import Maze from '$lib/components/Maze.svelte';
 	import { Graph } from '../lib/domain/data_structures/Graph';
-
 	onMount(async () => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
@@ -45,7 +44,6 @@
 		</select>
 	</section>
 </header>
-
 <section class="environment">
 	<AceEditor
 		bind:value={algorithms[algorithmID].algorithm}
