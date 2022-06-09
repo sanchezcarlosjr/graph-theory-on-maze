@@ -66,10 +66,10 @@ export class Graph {
 		let path: string[] = [];
 		let actualVertex = goal;
 		while (actualVertex !== undefined) {
-			path = [actualVertex, ...path];
+			path.push(actualVertex);
 			actualVertex = this.vertex(actualVertex)?.predecessor as string;
 		}
-		return path;
+		return path.reverse();
 	}
 
 	hasEdge(vertexA: string, vertexB: string) {
