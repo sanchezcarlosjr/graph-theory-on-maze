@@ -68,49 +68,49 @@ export const algorithms: Algorithm[] = [
 	{
 		id: 3,
 		name: 'Breadth first search',
-		algorithm: `function find_shortest_path_by_breadth_first_search(G, source, goal) {
+		algorithm: `function find_shortest_path_by_breadth_first_search(graph, source, goal) {
     return graph.reconstruct_path(goal);
 }`
 	},
 	{
 		id: 4,
 		name: 'Linear programming',
-		algorithm: `function find_shortest_path_by_linear_programming(G, source, goal) {
+		algorithm: `function find_shortest_path_by_linear_programming(graph, source, goal) {
     return graph.reconstruct_path(goal);
 }`
 	},
 	{
 		id: 5,
 		name: 'Bellman-Ford',
-		algorithm: `function find_shortest_path_by_bellman_ford(G, source, goal) {
+		algorithm: `function find_shortest_path_by_bellman_ford(graph, source, goal) {
     return graph.reconstruct_path(goal);
 }`
 	},
 	{
 		id: 6,
 		name: 'Deep first search',
-		algorithm: `function find_shortest_path_by_deep_first_search(G, source, goal) {
+		algorithm: `function find_shortest_path_by_deep_first_search(graph, source, goal) {
     return graph.reconstruct_path(goal);
 }`
 	},
 	{
 		id: 7,
 		name: 'Genetic algorithm',
-		algorithm: `function find_shortest_path_by_genetic_algorithm(G, source, goal) {
+		algorithm: `function find_shortest_path_by_genetic_algorithm(graph, source, goal) {
     return graph.reconstruct_path(goal);
 }`
 	},
 	{
 		id: 8,
-		name: 'DAG-SHORTEST-PATHS',
-		algorithm: `function find_shortest_path_by_dag(G, source, goal) {
+		name: 'DAG',
+		algorithm: `function find_shortest_path_by_dag(graph, source, goal) {
     return graph.reconstruct_path(goal);
 }`
 	},
 	{
 		id: 9,
 		name: 'Manual',
-		algorithm: `function find_shortest_path_by_user(G, source, goal) {
+		algorithm: `function find_shortest_path_by_user(graph, source, goal) {
        const path = [
         source, 
         source+=20,

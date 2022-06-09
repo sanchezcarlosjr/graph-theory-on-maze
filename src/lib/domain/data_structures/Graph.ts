@@ -72,6 +72,13 @@ export class Graph {
 		return path.reverse();
 	}
 
+	clean() {
+		for (const vertex of this.vertices) {
+			 delete vertex['predecessor'];
+			 delete vertex['distance'];
+		}
+	}
+
 	hasEdge(vertexA: string, vertexB: string) {
 		return (
 			this.graph.has(vertexA) &&

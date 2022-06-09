@@ -10,7 +10,10 @@ export class Algorithm {
 		return this.repository.loadAll();
 	}
 	execute(algorithm: string) {
-		return new Function('G', 'source', 'goal', `return ${algorithm}(G, source, goal)`);
+		return new Function('G', 'source', 'goal', `
+		             G.clean();
+		             return ${algorithm}(G, source, goal);
+		`);
 	}
 
 	save(algorithmCode: string) {

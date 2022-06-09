@@ -175,7 +175,7 @@ export class TextureAttribute extends GLAttribute<TextureAttributeProperties> {
 		const texture = this.gl.createTexture();
 		this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
 
-		// Set the parameters so we can render any size image.
+		// Set the parameters so we can renderNewPath any size image.
 		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
 		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
 		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.NEAREST);

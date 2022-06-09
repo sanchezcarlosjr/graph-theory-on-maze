@@ -5,6 +5,7 @@
 	import { PriorityQueue } from '$lib/domain/data_structures/PriorityQueue';
 	import AceEditor from '$lib/components/AceEditor.svelte';
 	import Maze from '$lib/components/Maze.svelte';
+	import { browser } from '$app/env';
 	import { Graph } from '../lib/domain/data_structures/Graph';
 	onMount(async () => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -16,16 +17,24 @@
 	let algorithmID = algorithm.loadDefault();
 	let graph = new Graph();
 	let source = '';
+	let n = browser ? parseInt(localStorage.getItem("size") ?? "20") : 20;
 	let goal = '';
 	let path = [];
-	let algorithmCode = '';
+	let lastCode = {validSyntax: false, value: ''};
 	const execute = (obj) => {
-		if (obj.validSyntax && algorithmCode !== obj.value.trim()) {
-			algorithmCode = obj.value;
-			path = algorithm.execute(algorithmCode)(graph, source, goal);
-			algorithm.save(algorithmCode);
+		if (obj.validSyntax && lastCode !== obj.value.trim()) {
+			lastCode = obj;
+			path = algorithm.execute(lastCode.value)(graph, source, goal);
+			algorithm.save(lastCode.value);
 		}
 	};
+	const executeNewGraph = (graph) => {
+		if(browser) {
+			localStorage.setItem("size", n.toString());
+		}
+		execute(lastCode);
+	};
+	$: executeNewGraph(graph);
 </script>
 
 <svelte:head>
@@ -35,13 +44,36 @@
 <header>
 	<h1>Graph Theory Visualizer: Maze</h1>
 	<section class="options">
-		<select bind:value={algorithmID}>
-			{#each algorithms as element}
-				<option value={element.id}>
-					{element.name}
-				</option>
-			{/each}
-		</select>
+		<fieldset>
+			<legend>Size</legend>
+			<select bind:value={n}>
+				{#each [5,10,20,40] as graphSize}
+					<option value={graphSize}>
+						{graphSize}
+					</option>
+				{/each}
+			</select>
+		</fieldset>
+		<fieldset>
+			<legend>Algorithm</legend>
+			<select bind:value={algorithmID}>
+				{#each algorithms as element}
+					<option value={element.id}>
+						{element.name}
+					</option>
+				{/each}
+			</select>
+		</fieldset>
+		<fieldset>
+			<legend>Level</legend>
+			<select>
+				{#each [{level: 2, name: "Find shortest path"}, {level: 3, name: "Score"}, {level: 1, name: "Find path"}] as element}
+					<option value={element.level}>
+						{element.name}
+					</option>
+				{/each}
+			</select>
+		</fieldset>
 	</section>
 </header>
 <section class="environment">
@@ -50,7 +82,7 @@
 		on:input={(obj) => execute(obj.detail)}
 		--width="47%"
 	/>
-	<Maze bind:graph bind:goal bind:source bind:path --width="53%" />
+	<Maze bind:n bind:graph bind:goal bind:source bind:path --width="53%" />
 </section>
 
 <style>
