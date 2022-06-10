@@ -7,10 +7,16 @@
 	import Maze from '$lib/components/Maze.svelte';
 	import { browser } from '$app/env';
 	import { Graph } from '../lib/domain/data_structures/Graph';
+	import {Queue} from "../lib/domain/data_structures/Queue";
+	import {QueueRecorder} from "../lib/domain/data_structures/QueueRecorder";
 	onMount(async () => {
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		window.PriorityQueue = PriorityQueue;
+		// @ts-ignore
+		window.Queue = Queue;
+		// @ts-ignore
+		window.QueueRecorder = QueueRecorder;
 	});
 	const algorithm = new Algorithm(new LocalStorageRepository());
 	const algorithms = algorithm.loadAlgorithms();

@@ -15,6 +15,10 @@ export class Graph {
 		return this.graph.values();
 	}
 
+	get countVertices() {
+		return this.graph.size;
+	}
+
 	addDirectedEdge(
 		vertexA: string,
 		vertexB: string,

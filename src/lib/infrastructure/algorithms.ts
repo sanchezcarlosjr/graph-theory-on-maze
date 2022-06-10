@@ -69,7 +69,25 @@ export const algorithms: Algorithm[] = [
 		id: 3,
 		name: 'Breadth first search',
 		algorithm: `function find_shortest_path_by_breadth_first_search(graph, source, goal) {
-    return graph.reconstruct_path(goal);
+    graph.initialize_single_source(source);
+    const queue = new QueueRecorder();
+    queue.enqueue(source);
+    while(!queue.isEmpty) {
+        const u = queue.dequeue();
+        if (u === goal) {
+            return graph.reconstruct_path(goal);
+        }
+        for (const [neighbor] of graph.getAdjacent(u)) {
+             if (graph.isWall(neighbor)) {
+                 continue;
+             }
+             const neighborWasRecorded = queue.enqueue(neighbor);
+             if (neighborWasRecorded) {
+                 graph.relax(u, neighbor);
+             }
+        }
+    }
+    return [];
 }`
 	},
 	{

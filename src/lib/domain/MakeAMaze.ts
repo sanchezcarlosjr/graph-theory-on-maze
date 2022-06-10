@@ -56,6 +56,10 @@ export class Maze extends Graph {
 			i < this.side**2 - this.side;
 	}
 
+	isWall(vertex: string) {
+		return this.vertex(vertex)?.cost === Infinity;
+	}
+
 	toEuclidean(i: string) {
 		const vertex = parseInt(i);
 		return [vertex%this.side, Math.floor(vertex/this.side)];
