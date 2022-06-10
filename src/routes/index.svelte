@@ -90,6 +90,10 @@
 	/>
 	<Maze bind:n bind:graph bind:goal bind:source bind:path --width="53%" />
 </section>
+<footer>
+	<a href="https://github.com/sanchezcarlosjr/graph-theory-on-maze">GitHub</a>
+	<a href="https://sanchezcarlosjr.notion.site/UABC-An-lisis-de-Algoritmos-38fac5ca34e740719b43673db9f8b918">Algoritmos</a>
+</footer>
 
 <style>
 	.environment {
