@@ -1,4 +1,4 @@
-interface Vertex {
+export interface Vertex {
 	adjacent: Map<string, { [key: string]: string | number | boolean }>;
 
 	[key: string]:
@@ -9,8 +9,8 @@ interface Vertex {
 }
 
 export class Graph {
-	private graph = new Map<string, Vertex>();
-
+	constructor(private graph = new Map<string, Vertex>()) {
+	}
 	get vertices() {
 		return this.graph.values();
 	}
@@ -81,6 +81,7 @@ export class Graph {
 			 delete vertex['predecessor'];
 			 delete vertex['distance'];
 		}
+		this.iterators = {};
 	}
 
 	hasEdge(vertexA: string, vertexB: string) {
@@ -105,7 +106,7 @@ export class Graph {
 
 	relax(u: string, v: string) {
 		const newDistance =
-			(this.vertex(v)?.cost as number) + (this.vertex(u)?.distance as number) + this.weight(u, v);
+			((this.vertex(v)?.cost as number) ?? 0)  + ((this.vertex(u)?.distance as number) ?? 0) + this.weight(u, v);
 		if (newDistance === Infinity) {
 			return false;
 		}
@@ -134,5 +135,21 @@ export class Graph {
 
 	getAdjacent(vertex: string) {
 		return this.graph.get(vertex)?.adjacent;
+	}
+
+	private iterators: {[vertex: string]: IterableIterator<[string, Vertex]>} = {};
+	exploreNeighbor(current_vertex: string): string|undefined {
+		if (!Object.hasOwn(this.iterators, current_vertex)) {
+			 this.iterators[current_vertex] = (this.getAdjacent(current_vertex) as Map<string, Vertex>)[Symbol.iterator]();
+		}
+		const neighbor = this.iterators[current_vertex].next();
+		return neighbor.done ? undefined : neighbor.value[0];
+	}
+
+	addVertex(vertex: string) {
+		this.graph.set(vertex, {
+			adjacent: new Map<string, { [key: string]: string | number | boolean }>(),
+			name: vertex
+		});
 	}
 }

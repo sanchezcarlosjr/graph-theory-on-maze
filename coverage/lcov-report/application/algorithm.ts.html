@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for RandomBetweenNumbers.ts</title>
+    <title>Code coverage report for application/algorithm.ts</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="prettify.css" />
-    <link rel="stylesheet" href="base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(sort-arrow-sprite.png);
+            background-image: url(../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> RandomBetweenNumbers.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">application</a> algorithm.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.75% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/16</span>
+                <span class='fraction'>3/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">40% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/4</span>
+                <span class='fraction'>2/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">42.85% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>10/15</span>
+                <span class='fraction'>3/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -86,51 +86,54 @@
 <a name='L21'></a><a href='#L21'>21</a>
 <a name='L22'></a><a href='#L22'>22</a>
 <a name='L23'></a><a href='#L23'>23</a>
-<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export function randomBetweenNumbers(max: number, min: number) {
-	return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { AlgorithmRepository } from '../domain/algorithm';
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >randomBetweenArray(</span>...array: any[]) {
-	const index = <span class="cstat-no" title="statement not covered" >randomBetweenNumbers(array.length - 1, 0);</span>
-<span class="cstat-no" title="statement not covered" >	return [array[index], index];</span>
-}
-&nbsp;
-export function randomArray(...array: any[]) {
-	const newArray = [...array];
-	for(let n=array.length-1; n&gt;=1; n--) {
-		const index = randomBetweenNumbers(n, 0);
-		[newArray[n], newArray[index]] = [newArray[index], newArray[n]];
+export class Algorithm {
+	constructor(private repository: AlgorithmRepository) {}
+<span class="fstat-no" title="function not covered" >	loadDefault(</span>): number {
+<span class="cstat-no" title="statement not covered" >		return this.repository.load();</span>
 	}
-	return [array, newArray];
-}
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >randomBetweenSet(</span>set: Set&lt;any&gt;) {
-	const index = <span class="cstat-no" title="statement not covered" >randomBetweenNumbers(set.size - 1, 0);</span>
-	const value = <span class="cstat-no" title="statement not covered" >[...set.values()][index];</span>
-<span class="cstat-no" title="statement not covered" >	return [value, index];</span>
+<span class="fstat-no" title="function not covered" >	loadAlgorithms(</span>) {
+<span class="cstat-no" title="statement not covered" >		return this.repository.loadAll();</span>
+	}
+	execute(algorithm: string) {
+		return new Function('G', 'source', 'goal', `
+		             G.clean();
+		             return ${algorithm}(G, source, goal);
+		`);
+	}
+&nbsp;
+<span class="fstat-no" title="function not covered" >	save(</span>algorithmCode: string) {
+<span class="cstat-no" title="statement not covered" >		<span class="missing-if-branch" title="if path not taken" >I</span>if (algorithmCode !== '') {</span>
+<span class="cstat-no" title="statement not covered" >			this.repository.save(algorithmCode);</span>
+		}
+	}
 }
 &nbsp;</pre></td></tr></table></pre>
 
@@ -139,16 +142,16 @@ export function <span class="fstat-no" title="function not covered" >randomBetwe
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Jun 20 2022 18:17:41 GMT-0500 (Central Daylight Time)
+                at Sun Jul 03 2022 22:55:22 GMT-0500 (Central Daylight Time)
             </div>
-        <script src="prettify.js"></script>
+        <script src="../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="sorter.js"></script>
-        <script src="block-navigation.js"></script>
+        <script src="../sorter.js"></script>
+        <script src="../block-navigation.js"></script>
     </body>
 </html>
     
