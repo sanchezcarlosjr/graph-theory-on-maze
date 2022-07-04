@@ -106,53 +106,38 @@ export const algorithms: Algorithm[] = [
         id: 6,
         name: 'Deep first search',
         algorithm: `function find_shortest_path_by_deep_first_search(graph, source, goal) {
-// Introduction to algorithms 20.3 Deep first search 4th edition
-class DeepFirstSearcher {
-    constructor(graph, goal) {
-      this.graph = graph;
-      this.goal = goal;
-      this.records = new Set();
-    }
-    explore() {
-        for (const {name: vertex} of this.graph.vertices) {
-            if (!this.records.has(vertex)) {
-                const goal_has_found = this.visit(vertex);
-                if (goal_has_found) {
-                    return this.graph.reconstruct_path(this.goal);
-                }
-            }
-        }
-    }
-
-    visit(vertex) {
+        // Introduction to algorithms 20.3 Deep first search 4th edition
+        graph.initialize_single_source(source);
         const stack = [];
-        let current_vertex = vertex;
+        const records = new Set();
+        let current_vertex = source;
         while (true) {
             do {
-                while (current_vertex !== undefined && !this.records.has(current_vertex)) {
+                while (
+                     current_vertex !== undefined && 
+                     !records.has(current_vertex) &&
+                     graph.vertex(current_vertex).cost < Infinity
+                    ) {
                     stack.push(current_vertex);
-                    this.records.add(current_vertex);
+                    records.add(current_vertex);
                     if (stack.length >= 2) {
-                        this.graph.relax(stack[stack.length-2], stack[stack.length-1]);
+                        graph.relax(stack[stack.length-2], stack[stack.length-1]);
                     }
-                    if (current_vertex == this.goal) {
-                        return true;
+                    if (current_vertex === goal) {
+                        return graph.reconstruct_path(goal);
                     }
-                    current_vertex = this.graph.exploreNeighbor(current_vertex);
+                    current_vertex = graph.exploreNeighbor(current_vertex);
                 }
-            } while ((current_vertex = this.graph.exploreNeighbor(stack[stack.length - 1])) !== undefined);
+            } while ((current_vertex = graph.exploreNeighbor(stack[stack.length - 1])) !== undefined);
             stack.pop();
             if (stack.length === 0) {
-                return false;
+                return [];
             }
-            current_vertex = this.graph.exploreNeighbor(stack[stack.length - 1]);
+            current_vertex = graph.exploreNeighbor(stack[stack.length - 1]);
         }
-    }
-}
-    graph.initialize_single_source(source);
-    const dfs = new DeepFirstSearcher(graph, goal);
-    return dfs.explore();
-}`
+        return [];
+} 
+        `
     },
     {
         id: 7,
